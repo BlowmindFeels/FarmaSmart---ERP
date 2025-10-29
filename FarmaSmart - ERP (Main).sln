@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36327.8 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmaSmart.UI", "FarmaSmart - ERP (Main)\FarmaSmart.UI.csproj", "{955CE3A8-D468-4DC8-BDA9-CFDE7767F32E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmaSmart.BLL", "FarmaSmart.BLL\FarmaSmart.BLL.csproj", "{65A424FC-6381-45BF-BF69-DB3FB1027FEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmaSmart.DAL", "FarmaSmart.DAL\FarmaSmart.DAL.csproj", "{4497F385-9C6F-446C-A5CC-C4E2561991CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmaSmart.Models", "FarmaSmart.Models\FarmaSmart.Models.csproj", "{72E84597-55C5-495E-9B56-B7661D78898F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{955CE3A8-D468-4DC8-BDA9-CFDE7767F32E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{955CE3A8-D468-4DC8-BDA9-CFDE7767F32E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{955CE3A8-D468-4DC8-BDA9-CFDE7767F32E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{955CE3A8-D468-4DC8-BDA9-CFDE7767F32E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65A424FC-6381-45BF-BF69-DB3FB1027FEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65A424FC-6381-45BF-BF69-DB3FB1027FEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65A424FC-6381-45BF-BF69-DB3FB1027FEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65A424FC-6381-45BF-BF69-DB3FB1027FEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4497F385-9C6F-446C-A5CC-C4E2561991CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4497F385-9C6F-446C-A5CC-C4E2561991CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4497F385-9C6F-446C-A5CC-C4E2561991CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4497F385-9C6F-446C-A5CC-C4E2561991CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72E84597-55C5-495E-9B56-B7661D78898F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72E84597-55C5-495E-9B56-B7661D78898F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72E84597-55C5-495E-9B56-B7661D78898F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72E84597-55C5-495E-9B56-B7661D78898F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B5997043-0F3B-43C9-8C95-F0F1848F6139}
+	EndGlobalSection
+EndGlobal
