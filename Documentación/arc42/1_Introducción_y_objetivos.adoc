@@ -1,0 +1,47 @@
+= 1. Introducción y Objetivos
+:toc:
+:sectnums:
+
+== 1.1 Propósito del Documento
+Este documento forma parte de la documentación arquitectónica bajo la plantilla arc42. 
+Su propósito es describir los objetivos, alcance y motivaciones del sistema **FarmaSmart ERP**, 
+una solución de planificación de recursos empresariales diseñada para la cadena farmacéutica *Farmatodo*.
+
+== 1.2 Contexto del Proyecto
+Farmatodo es una empresa dedicada a la distribución y comercialización de productos 
+farmacéuticos y de consumo. La compañía enfrenta retos relacionados con:
+- Crecimiento constante de la operación.
+- Procesos manuales o dispersos en diferentes áreas.
+- Falta de trazabilidad y riesgos como ruptura de stock, errores en facturación, 
+  control financiero limitado y baja capacidad para la toma de decisiones estratégicas.
+
+== 1.3 Objetivo General
+Desarrollar un sistema **ERP (Enterprise Resource Planning)** que integre y optimice 
+los procesos clave de la organización en una plataforma centralizada, permitiendo 
+un control en tiempo real de inventario, ventas, compras, proveedores, clientes, 
+recursos humanos y finanzas.
+
+== 1.4 Objetivos Específicos
+- Garantizar una gestión de inventario eficiente con lotes, vencimientos y control de stock en tiempo real.
+- Optimizar los procesos de facturación, ventas y compras, reduciendo errores y duplicidades.
+- Centralizar la información contable y financiera para mejorar la trazabilidad y la toma de decisiones.
+- Implementar controles de acceso y roles que aseguren la seguridad de los datos.
+- Proveer un sistema modular y escalable que se adapte al crecimiento de la organización.
+
+== 1.5 Audiencia Objetivo
+Este documento está dirigido a:
+- Equipo de desarrollo de software (backend, frontend, QA).
+- Scrum Master y Product Owner.
+- Stakeholders internos de Farmatodo (directivos, administradores de área).
+- Profesores y evaluadores académicos en el marco del curso de *Arquitectura de Software*.
+
+== 1.6 Alcance
+El sistema **FarmaSmart ERP** abarcará inicialmente:
+- Módulo de inventario.
+- Módulo de gestión de clientes y proveedores.
+- Módulo de ventas y facturación.
+- Módulo de roles, permisos y autenticación.
+- Base de datos relacional con integración vía API REST.
+
+A futuro, el ERP podrá ampliarse con módulos de recursos humanos, integración contable avanzada, 
+reportes de BI (Business Intelligence) y funcionalidades de analítica predictiva.

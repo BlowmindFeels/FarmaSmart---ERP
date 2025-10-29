@@ -1,0 +1,47 @@
+= 4. Solución General
+:toc:
+:sectnums:
+
+== 4.1 Enfoque de la Solución
+El sistema **FarmaSmart ERP (prototipo académico)** se plantea como una aplicación web modular, 
+diseñada bajo principios de arquitectura en capas y metodologías ágiles.  
+La solución se centra en construir un prototipo funcional de los módulos críticos 
+(inventario, ventas, clientes, proveedores, autenticación), garantizando 
+una base escalable y extensible para futuras fases.
+
+== 4.2 Principios de Diseño
+- **Arquitectura modular**: Separación clara entre frontend, backend y base de datos.  
+- **Escalabilidad académica**: Aunque no se desplegará en un entorno empresarial real, 
+  el diseño permitirá agregar módulos de forma incremental.  
+- **Separación de responsabilidades (SoC)**: Cada módulo del sistema (inventario, clientes, ventas) 
+  debe estar aislado para facilitar mantenimiento y pruebas.  
+- **Seguridad básica**: Implementación de roles, permisos y autenticación de usuarios.  
+- **Trazabilidad**: Registro de operaciones (alta, baja, modificación) en inventario, clientes y ventas.  
+
+== 4.3 Decisiones Tecnológicas Globales
+- **Frontend**: Aplicación web construida con un framework moderno (React/Angular/Vue), 
+  orientada a una interfaz responsiva y sencilla.  
+- **Backend/API REST**: Servicios desarrollados en Node.js o Java (Spring Boot), 
+  encargados de la lógica de negocio y comunicación con el frontend.  
+- **Base de Datos Relacional**: PostgreSQL o MySQL como gestor principal, con modelo relacional 
+  para productos, clientes, proveedores, usuarios y roles.  
+- **Control de Versiones**: Uso de Git/GitHub para la gestión del código fuente.  
+- **Gestión del Proyecto**: Aplicación de Scrum con planificación en sprints, 
+  backlog, planning poker y definición de terminado.  
+
+== 4.4 Estilo Arquitectónico
+La solución sigue un **estilo cliente-servidor en tres capas**:
+1. **Capa de presentación**: Interfaz web para usuarios finales.  
+2. **Capa de aplicación/servicios**: Backend con lógica de negocio y API REST.  
+3. **Capa de datos**: Base de datos relacional que centraliza la información.  
+
+== 4.5 Estrategia de Calidad
+- **Pruebas funcionales**: Validación de CRUD en inventario, clientes y ventas.  
+- **Pruebas de seguridad básicas**: Verificación de roles y permisos.  
+- **Pruebas de integración**: Validación de la comunicación entre frontend, backend y base de datos.  
+- **Prototipado iterativo**: Entregas parciales en cada sprint para retroalimentación temprana.  
+
+== 4.6 Limitaciones y Alcance
+- El sistema se desarrollará como **prototipo académico**, sin integración con sistemas reales de Farmatodo.  
+- Los módulos de recursos humanos, contabilidad avanzada y facturación electrónica quedan excluidos de esta fase.  
+- La seguridad implementada será únicamente a nivel básico (hashing de contraseñas, roles y permisos).  

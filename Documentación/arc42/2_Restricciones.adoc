@@ -1,0 +1,23 @@
+== 2. Restricciones
+:toc:
+:sectnums:
+
+== 2.1 Restricciones de Negocio
+- **Prototipo académico**: El proyecto se desarrolla únicamente con fines educativos en el marco del curso de *Arquitectura de Software* de la Universidad Manuela Beltrán.  
+- **Sin despliegue en entorno productivo**: No se realizará implementación directa en la empresa *Farmatodo*. El alcance es únicamente un prototipo funcional de ERP.  
+- **Tiempo limitado**: El desarrollo se enmarca en los tiempos definidos por los sprints del semestre académico, lo que restringe la profundidad y amplitud del sistema.  
+- **Recursos humanos**: El equipo de desarrollo está conformado solo por estudiantes, con roles distribuidos entre desarrolladores, Scrum Master y tester bajo supervisión académica.  
+
+== 2.2 Restricciones Técnicas
+- **Tecnologías predefinidas**: El sistema se construirá utilizando tecnologías estándar de desarrollo web (ejemplo: backend en Node.js/Java/Spring Boot, frontend en React/Angular/Vue, base de datos relacional).  
+- **Alcance limitado de integración**: No habrá integración real con sistemas externos de Farmatodo (contabilidad, logística, proveedores). Las conexiones se simularán o se representarán con datos de prueba.  
+- **Seguridad mínima**: Aunque se implementarán roles y permisos básicos, no se aplicarán certificaciones, auditorías externas ni despliegues en entornos regulados.  
+
+== 2.3 Restricciones Organizacionales
+- **Metodología de trabajo**: El proyecto debe seguir enfoques ágiles (Scrum con sprints, backlog, planning poker y definición de terminado).  
+- **Documentación obligatoria**: Se utiliza la plantilla arc42 en formato AsciiDoc como guía oficial de documentación arquitectónica.  
+- **Evaluación académica**: El resultado final será entregado y evaluado en un entorno académico, no en un entorno empresarial.  
+
+== 2.4 Restricciones de Alcance
+- **Cobertura funcional reducida**: El prototipo cubrirá principalmente los módulos de inventario, gestión de clientes, proveedores, ventas, autenticación y API REST.  
+- **Exclusiones**: No se desarrollarán en esta fase módulos avanzados de recursos humanos, analítica, integración con sistemas contables reales ni facturación electrónica legalmente válida.  

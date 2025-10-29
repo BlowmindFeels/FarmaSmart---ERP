@@ -1,0 +1,64 @@
+= 3. Contexto
+:toc:
+:sectnums:
+
+== 3.1 Contexto del Negocio
+El sistema **FarmaSmart ERP (prototipo académico)** se concibe como una solución para
+integrar los procesos principales de la cadena farmacéutica *Farmatodo*.  
+Aunque el prototipo no será implementado en la empresa, su diseño refleja el 
+entorno de negocio real en el que operaría un ERP.
+
+Los principales actores de negocio son:
+
+- **Administrador**: Usuario encargado de gestionar la configuración del sistema, 
+  crear roles y asignar permisos.  
+- **Empleado**: Usuario operativo que interactúa con los módulos de inventario, 
+  ventas y gestión de clientes.  
+- **Cliente**: Consumidor que adquiere productos y servicios en Farmatodo.  
+- **Proveedor**: Entidad que suministra productos farmacéuticos y de consumo.  
+- **Contabilidad (simulada)**: Área interesada en el control financiero y generación 
+  de reportes básicos.  
+
+== 3.2 Contexto Técnico
+El prototipo estará compuesto por los siguientes elementos tecnológicos:
+
+- **Frontend Web**: Interfaz de usuario accesible desde un navegador.  
+- **Backend/API REST**: Lógica de negocio y endpoints para comunicación con el frontend.  
+- **Base de Datos Relacional**: Almacenamiento de productos, clientes, proveedores, ventas y roles.  
+- **Entorno de Desarrollo**: Proyecto académico gestionado con control de versiones (Git/GitHub) 
+  y metodologías ágiles (Scrum).  
+
+== 3.3 Diagrama de Contexto (PlantUML)
+
+[plantuml, contexto-sistema, png]
+----
+@startuml
+actor Administrador
+actor Empleado
+actor Cliente
+actor Proveedor
+actor Contabilidad
+
+rectangle "FarmaSmart ERP (Prototipo)" {
+  rectangle "Frontend Web" as FE
+  rectangle "Backend / API REST" as BE
+  database "Base de Datos Relacional" as DB
+}
+
+Administrador --> FE : Configuración de roles/permisos
+Empleado --> FE : Gestión de inventario / ventas
+Cliente --> FE : Interacción en punto de venta (simulada)
+Proveedor --> BE : Registro de proveedores (simulado)
+Contabilidad --> BE : Solicitud de reportes básicos (simulado)
+
+FE --> BE
+BE --> DB
+@enduml
+----
+
+== 3.4 Alcance del Contexto
+- Las interacciones con **clientes y proveedores** serán simuladas con datos de prueba.  
+- La **contabilidad** solo se representa como actor externo con reportes simulados, 
+  sin integración real con sistemas contables de Farmatodo.  
+- El alcance técnico y de negocio queda restringido al **prototipo académico** 
+  para validación de conceptos arquitectónicos.

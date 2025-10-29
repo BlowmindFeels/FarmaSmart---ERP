@@ -1,0 +1,67 @@
+= 10. Conceptos Clave
+:toc:
+:sectnums:
+
+== 10.1 Propósito
+Este apartado define los conceptos y términos principales utilizados en el prototipo **FarmaSmart ERP**.  
+El glosario asegura un entendimiento común entre el equipo de desarrollo, el profesor evaluador 
+y los posibles stakeholders simulados.
+
+== 10.2 Glosario de Conceptos
+
+=== Cliente
+Persona natural registrada en el sistema para realizar compras de productos.  
+Debe contar con información mínima: nombre completo, documento de identidad y teléfono.  
+Los clientes se asocian a las ventas y quedan registrados en el histórico de transacciones.
+
+=== Proveedor
+Entidad (empresa o persona jurídica) que suministra productos farmacéuticos o de consumo.  
+Su información básica incluye: nombre, NIT, dirección de contacto y teléfono.  
+Los proveedores están vinculados al módulo de compras y abastecimiento.
+
+=== Producto
+Artículo farmacéutico o de consumo administrado en el inventario.  
+Cada producto tiene atributos: código, nombre, descripción, lote y fecha de vencimiento.  
+El sistema controla su stock en tiempo real y evita registros duplicados por código.
+
+=== Inventario
+Conjunto organizado de productos disponibles en las sucursales.  
+Incluye control de lotes, fechas de vencimiento y stock mínimo.  
+Cada movimiento de entrada o salida (ventas o compras) actualiza automáticamente el inventario.
+
+=== Venta
+Operación comercial que consiste en la entrega de productos a un cliente a cambio de pago.  
+El sistema genera automáticamente una factura única y consecutiva, y descuenta el stock correspondiente.
+
+=== Factura
+Documento generado por el sistema para registrar una venta.  
+Debe incluir: número consecutivo, datos de cliente, productos vendidos, impuestos aplicables y total de la transacción.  
+Se almacena como comprobante histórico y puede ser consultado en reportes.
+
+=== Usuario
+Persona que accede al sistema (empleado o administrador).  
+Cada usuario tiene credenciales de autenticación y está asociado a uno o varios roles.  
+
+=== Rol
+Conjunto de permisos asignados a un usuario.  
+Ejemplos:  
+- *Administrador*: puede gestionar roles, permisos, usuarios y configuraciones.  
+- *Empleado*: puede registrar ventas, clientes y consultar inventario.  
+
+=== Permiso
+Autorización que habilita o restringe el acceso a una funcionalidad del sistema.  
+Se implementa bajo el esquema **RBAC (Role-Based Access Control)**.  
+
+=== Reporte
+Documento generado por el sistema que resume información clave, por ejemplo: ventas por rango de fechas,  
+stock disponible, compras realizadas. En el prototipo, los reportes son básicos y no incluyen integración contable real.
+
+=== Base de Datos Relacional
+Estructura central donde se almacena toda la información del ERP: usuarios, productos, clientes, proveedores, ventas, facturas.  
+Se utilizan llaves primarias y foráneas para mantener integridad referencial.
+
+== 10.3 Alcance del Glosario
+Este glosario aplica únicamente al **prototipo académico de FarmaSmart ERP**, 
+no a la operación real de la empresa Farmatodo.  
+Los conceptos definidos pueden ser ampliados o modificados en fases posteriores 
+cuando se integren nuevos módulos (ejemplo: Recursos Humanos, Contabilidad avanzada).

@@ -1,0 +1,43 @@
+= 6. Vista de Despliegue
+:toc:
+:sectnums:
+
+== 6.1 Propósito
+La vista de despliegue describe la infraestructura en la que se ejecutará el prototipo 
+**FarmaSmart ERP**. Dado que el alcance es académico, no habrá un entorno productivo en la empresa, 
+sino un entorno simulado en laboratorios de desarrollo y pruebas.
+
+== 6.2 Nodos de Despliegue
+- **Cliente (Aplicación de escritorio)**:  
+  Acceso al frontend del ERP a través de windows, mac y probablemente linux.  
+
+- **Servidor de Aplicaciones (Backend/API)**:  
+  Máquina local o servidor virtual donde se ejecuta el backend desarrollado en C#.  
+
+- **Servidor de Base de Datos**:  
+  Contenedor o instancia local de SQL Server donde se almacenan productos, clientes, ventas, proveedores y usuarios.  
+
+- **Repositorio de Código**:  
+  GitHub como servicio de control de versiones y colaboración del equipo.  
+
+== 6.3 Diagrama de Despliegue
+
+
+
+== 6.4 Consideraciones
+- El despliegue se realizará en **entornos locales de los estudiantes**, simulando servidores.  
+- Se podrá usar **Docker** para contenerizar la base de datos y facilitar la replicación del entorno.  
+- No habrá servidores en la nube ni infraestructura empresarial real, dado que se trata de un prototipo académico.  
+
+== 6.5 Estrategia de Entorno
+- **Entorno de Desarrollo**:  
+  - Backend ejecutado en Node.js o Spring Boot.  
+  - Base de datos en contenedor Docker (PostgreSQL/MySQL).  
+  - Frontend servido con `npm run dev` o equivalente.  
+
+- **Entorno de Demostración**:  
+  - Despliegue en un único servidor local (ejemplo: laptop personal).  
+  - Frontend + Backend corriendo en el mismo host, conectados a la base de datos local.  
+
+- **Exclusiones**:  
+  No se contemplan entornos de staging ni producción en esta fase académica.  
