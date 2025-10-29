@@ -1,0 +1,33 @@
+@startuml
+start
+:Iniciar proceso de venta en POS (items, cantidad, lote seleccionado opcional, sucursal);
+:Enviar operación de venta al ServicioVentas;
+:ServicioVentas envía datos al ValidadorDeDatos;
+partition Validador {
+  :Validar integridad de la venta (items, precios, identificadores lote);
+  :Validar idempotencia (evitar duplicados);
+}
+if (Validación OK?) then (sí)
+  :Intentar reservar stock (bloqueo temporal por lote/ubicación);
+  if (Reserva exitosa?) then (sí)
+    :Iniciar transacción atómica en BaseDatosInventario;
+    :Insertar registro de venta y actualizar stock por lote/ubicación;
+    :Registrar trazabilidad por lote;
+    :Commit transacción;
+    :Confirmar venta al POS;
+    stop
+  else (no)
+    if (modo offline activado?) then (sí)
+      :Encolar venta localmente (cola offline) con idempotencia;
+      :Notificar pendiente de sincronización al POS;
+      stop
+    else (no)
+      :Rechazar venta o solicitar autorización especial;
+      stop
+    endif
+  endif
+else (no)
+  :Retornar errores de validación al POS;
+  stop
+endif
+@enduml

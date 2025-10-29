@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Operador de Almacén" as Operador
+actor "Gestor de Inventario" as Gestor
+actor "POS (Punto de Venta)" as POS
+actor "Usuario Web / Administrativo" as WebUser
+actor "Proveedor Externo / ERP" as ProveedorExterno
+actor "Administrador / Operaciones" as Admin
+
+rectangle "Módulo de Inventario (Backend C#)\n- Lotes y vencimientos\n- Registro movimientos\n- Trazabilidad\n- Ajustes con autorización\n- Integración POS" as ModInventario {
+  [API REST / WebSocket] 
+  [Servicio de Notificaciones]
+  [Servicio de Reconciliación]
+}
+
+database "SQL Server (BaseDatosInventario)" as SQLServer
+
+Operador --> ModInventario : Registrar entradas/salidas/transferencias (lote, venc.)
+Gestor --> ModInventario : Crear/editar/eliminar productos\nImportación masiva CSV/Excel
+POS --> ModInventario : Consultar catálogo/stock\nRegistrar venta (decremento por lote)
+WebUser --> ModInventario : Consultar stock por sucursal\nExportar historial
+Admin --> ModInventario : Configurar alertas y permisos
+ProveedorExterno --> ModInventario : Suministrar datos proveedores / listas de precios
+
+ModInventario --> SQLServer : Persistir consultas y transacciones (SQL Server)
+ModInventario --> "Servicio de Notificaciones" : Enviar alertas (email/visual)
+ModInventario ..> ProveedorExterno : Sincronización / importaciones programadas
+
+note bottom
+  Tecnologías: Backend desarrollado en C#; Base de datos SQL Server.
+  El ValidadorDeDatos se ejecuta internamente antes de cualquier operación de escritura en la BD.
+end note
+@enduml

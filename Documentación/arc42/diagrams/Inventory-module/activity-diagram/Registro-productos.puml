@@ -1,0 +1,24 @@
+@startuml
+start
+:Ingresar datos producto (codigo_interno, UPC, marca, presentación, categoría, unidad, precios, impuestos, proveedores);
+:Enviar datos al ValidadorDeDatos;
+partition Validador {
+  :Validar campos obligatorios (codigo, nombre, unidad,...);
+  :Validar formato UPC y precios;
+}
+if (Validación OK?) then (sí)
+  :Comprobar duplicados por codigo_interno o UPC;
+  if (Duplicado encontrado?) then (sí)
+    :Mostrar alerta de duplicado y opciones (fusionar/omitir/cancelar);
+    stop
+  else (no)
+    :Guardar/Actualizar producto en BaseDatosProductos;
+    :Registrar historial de cambios y asociaciones a proveedores;
+    :Confirmar éxito al usuario;
+    stop
+  endif
+else (no)
+  :Exportar reporte de errores de validación;
+  stop
+endif
+@enduml

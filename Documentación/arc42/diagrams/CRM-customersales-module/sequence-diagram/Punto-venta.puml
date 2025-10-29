@@ -1,0 +1,41 @@
+@startuml
+actor "Vendedor" as Vendedor
+participant "Terminal POS (UI)" as POS
+participant "Servicio POS (negocio)" as ServicioPOS
+participant "ValidadorDeDatos" as Validador
+participant "Gestor de Promociones" as Promos
+participant "RepositorioBD Ventas" as BDVentas
+participant "RepositorioBD Inventario" as BDInv
+
+Vendedor -> POS : Escanear/Seleccionar productos, aplicar descuentos, ingresar pagos
+POS -> ServicioPOS : Solicitar procesar venta(datos venta, idVendedor)
+ServicioPOS -> Validador : ValidarVenta(datos venta)
+Validador -> Promos : Verificar promociones y reglas
+Promos --> Validador : Promoción válida / inválida
+Validador -> BDInv : Verificar stock disponible (consulta)
+alt validación OK
+  Validador --> ServicioPOS : Validación OK
+  ServicioPOS -> BDVentas : Guardar venta y pagos (INSERT)
+  alt guardado OK
+    BDVentas --> ServicioPOS : OK (idVenta)
+    ServicioPOS -> BDInv : Actualizar stock (UPDATE por cada producto)
+    alt stock actualizado OK
+      BDInv --> ServicioPOS : OK
+      ServicioPOS --> POS : Confirmación de venta (idVenta, recibo)
+      POS --> Vendedor : Mostrar comprobante y actualizar UI
+    else fallo actualizar stock
+      BDInv --> ServicioPOS : Error actualización stock
+      ServicioPOS --> POS : Error conciliación stock
+      POS --> Vendedor : Mostrar alerta y opciones (reversar/conciliar)
+    end
+  else fallo guardado venta
+    BDVentas --> ServicioPOS : Error
+    ServicioPOS --> POS : Error al guardar venta
+    POS --> Vendedor : Mostrar error
+  end
+else validación fallo
+  Validador --> ServicioPOS : Lista de errores
+  ServicioPOS --> POS : Mostrar errores al usuario
+  POS --> Vendedor : Mostrar campos con error
+end
+@enduml

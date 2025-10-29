@@ -1,0 +1,30 @@
+@startuml
+|Equipo de Plataforma (Ingeniería)|
+start
+:Definir escenario de prueba (TPS, concurrencia, duración, picos);
+:Preparar herramientas de prueba (scripts, datasets);
+:Ejecutar prueba de rendimiento (latencia, TPS, errores, soak);
+:Recolectar métricas y trazas (APM, logs, métricas de infra);
+:Enviar resultados al Servicio de Análisis de Rendimiento;
+|Servicio de Análisis de Rendimiento|
+:Recibir métricas y trazas;
+:Invocar ValidadorDeDatos para comparar métricas con SLAs\n(umbral de latencia, tiempo de actualización de stock);
+|ValidadorDeDatos|
+:Validar cumplimiento de SLAs y detectar cuellos de botella;
+if (Cumple SLAs?) then (si)
+  |Servicio de Análisis de Rendimiento|
+  :Archivar resultados y marcar versión como aceptada;
+  :Planificar pruebas de regresión periódicas;
+else (no)
+  |Servicio de Análisis de Rendimiento|
+  :Generar reporte de cuellos de botella y priorizar acciones;
+  :Proponer optimizaciones (índices BD, caching, reducción de payloads, refactor endpoints);
+  |Equipo de Plataforma (Ingeniería)|
+  :Implementar optimizaciones priorizadas;
+  :Desplegar cambios en entorno de staging;
+  ->|Equipo de Plataforma (Ingeniería)| :Volver a ejecutar pruebas de rendimiento
+endif
+:Desplegar monitorización y alertas en producción (dashboards, umbrales);
+:Configurar pruebas automáticas de regresión de rendimiento;
+stop
+@enduml

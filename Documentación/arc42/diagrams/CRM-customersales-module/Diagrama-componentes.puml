@@ -1,0 +1,71 @@
+@startuml Componentes_Backend_CRM_Refactor
+skinparam titleFontSize 14
+title Diagrama de Componentes — Backend (.NET / C#) — CRM Clientes/Ventas
+
+package "Backend (.NET / C#)" {
+  [API Router / Controllers] as Router
+
+  rectangle "Controllers\n- ClientesController\n- VendedoresController\n- POSController\n- AuditoriaController" as Controllers
+
+  rectangle "Application Services\n(Business logic)\n- ClienteService\n- VendedorService\n- POSService\n- InventarioService\n- AuditService" as Services
+
+  rectangle "Integrations / Adapters\n- PaymentAdapter\n- ReceiptAdapter" as Adapters
+
+  rectangle "Persistence Layer\n- ClienteRepository\n- VendedorRepository\n- VentaRepository\n- AuditRepository" as Repos
+
+  rectangle "Domain Models / DTOs\n- Cliente, Vendedor, Producto, Venta, Auditoria" as Models
+
+  rectangle "Cache Layer (opcional)\n(índices en memoria para búsquedas POS)" as CacheComp
+}
+
+database "SQL Server\n(tbl_clientes, tbl_vendedores, tbl_ventas, tbl_auditoria, ...)" as SQLServer
+node "Proveedor de Pagos (externo)" as PagoExt
+node "Impresora / Servicio Externo" as PrinterExt
+
+' Flujo de llamadas (Controllers -> Services -> Repos / Adapters / Cache)
+Router --> Controllers : enruta peticiones REST
+Controllers --> Services : invoca lógica de dominio
+
+' Clientes
+Controllers --> Services : POST/GET/PUT /clientes
+Services --> Repos : operaciones CRUD clientes
+Services --> AuditService : registrar auditoría en altas/mods
+
+' Vendedores
+Controllers --> Services : POST/GET/PUT /vendedores
+Services --> Repos : operaciones CRUD vendedores
+Services --> AuditService : registrar auditoría
+note right of Services
+Reglas para Vendedores (según HDU):
+· Email corporativo único (validación en Service/Repo)
+· No permitir eliminación si existen dependencias (planes de venta)
+end note
+
+' POS
+Controllers --> Services : endpoints POS (add-item, checkout)
+Services -> InventarioService : buscar producto por código/nombre
+InventarioService --> CacheComp : consulta cache para performance
+InventarioService --> Repos : fallback a SQL Server si necesita datos maestros
+Services --> Repos : guardar venta (transacción)
+Services --> Adapters : PaymentAdapter para procesar pago
+Adapters --> PagoExt : comunica con proveedor de pagos
+Services --> Adapters : ReceiptAdapter para generar comprobante
+Adapters --> PrinterExt : enviar/solicitar impresión o exponer URL/PDF
+
+' Auditoría y persistencia
+AuditService --> Repos : crear entrada de auditoría
+Repos --> SQLServer : operaciones persistentes
+
+' Modelos y DTOs usados por Controllers/Services
+Controllers --> Models : intercambio de DTOs/Modelos
+
+' Notas de NFR y comportamientos críticos
+note bottom
+Comportamiento crítico (según HDU):
+· Validar formatos y campos obligatorios al crear clientes (clienteService)
+· Registrar usuario y fecha en auditoría para altas/modificaciones (AuditService)
+· Cálculo de totales e impuestos en POSService (según reglas del negocio)
+· Cache para búsquedas e índices para mantener < 2s en búsquedas/ventas
+end note
+
+@enduml

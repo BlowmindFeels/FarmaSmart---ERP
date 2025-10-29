@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Operador de Almacén" as Operador
+
+package "Gestión de inventario con lotes y vencimientos" {
+  usecase "Registrar entrada/salida/transferencia\n(con lote y vencimiento)" as UC_RegistrarMovimiento
+  usecase "Validar movimiento y reglas de caducidad" as UC_ValidarMovimiento
+  usecase "Solicitar ajuste e autorización" as UC_AjusteAutorizado
+  usecase "Consultar trazabilidad por lote" as UC_TrazabilidadLote
+  usecase "Visualizar stock por sucursal y alertas" as UC_VerStockAlertas
+  usecase "Exportar historial por lote/producto" as UC_ExportarHistorial
+}
+
+Operador --> UC_RegistrarMovimiento
+Operador --> UC_AjusteAutorizado
+Operador --> UC_TrazabilidadLote
+Operador --> UC_VerStockAlertas
+Operador --> UC_ExportarHistorial
+UC_RegistrarMovimiento .> UC_ValidarMovimiento : <<incluye>>
+UC_AjusteAutorizado .> UC_ValidarMovimiento : <<incluye>>
+@enduml

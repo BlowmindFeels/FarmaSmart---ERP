@@ -1,0 +1,151 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+' === ENTIDADES PRINCIPALES ===
+class Producto {
+  +Guid IdProducto
+  +String CodigoInterno
+  +String UPC
+  +String Nombre
+  +String Marca
+  +String Presentacion
+  +String Categoria
+  +String Unidad
+  +List<ListaPrecio> Precios
+  +List<Proveedor> Proveedores
+  +DateTime FechaCreacion
+  +void ActualizarDatos(...)
+}
+
+class ListaPrecio {
+  +Guid IdListaPrecio
+  +Decimal Precio
+  +DateTime FechaInicio
+  +DateTime? FechaFin
+  +String Moneda
+}
+
+class Proveedor {
+  +Guid IdProveedor
+  +String Nombre
+  +String CodigoProveedor
+  +String Contacto
+}
+
+class Lote {
+  +Guid IdLote
+  +String CodigoLote
+  +DateTime FechaRecepcion
+  +DateTime FechaVencimiento
+  +Decimal CantidadInicial
+  +Decimal CantidadDisponible
+  +Guid ProductoId
+  +void ReducirCantidad(Decimal cantidad)
+}
+
+class StockPorLoteSucursal {
+  +Guid IdStock
+  +Guid IdLote
+  +String CodigoSucursal
+  +Decimal CantidadDisponible
+  +DateTime UltimaActualizacion
+}
+
+class Movimiento {
+  +Guid IdMovimiento
+  +Enum TipoMovimiento {ENTRADA, SALIDA, TRANSFERENCIA, AJUSTE}
+  +Guid ProductoId
+  +Guid? LoteId
+  +String SucursalOrigen
+  +String SucursalDestino
+  +Decimal Cantidad
+  +DateTime FechaMovimiento
+  +String Usuario
+  +String Motivo
+}
+
+class Venta {
+  +Guid IdVenta
+  +String NumeroVenta
+  +List<DetalleVenta> Detalles
+  +DateTime FechaVenta
+  +String UsuarioPOS
+  +Enum EstadoVenta {CONFIRMADA, PENDIENTE, ENCOLADA}
+}
+
+class DetalleVenta {
+  +Guid IdDetalle
+  +Guid ProductoId
+  +Guid? LoteId
+  +Decimal Cantidad
+  +Decimal PrecioUnitario
+}
+
+class Reserva {
+  +Guid IdReserva
+  +Guid LoteId
+  +String Sucursal
+  +Decimal CantidadReservada
+  +DateTime FechaReserva
+  +Enum EstadoReserva {ACTIVA, LIBERADA, CONSUMIDA}
+}
+
+class AjusteInventario {
+  +Guid IdAjuste
+  +Guid ProductoId
+  +Guid? LoteId
+  +Decimal CantidadCambio
+  +Boolean RequiereAutorizacion
+  +Boolean Aprobado
+  +String UsuarioSolicitante
+  +String UsuarioAprobador
+  +DateTime FechaAprobacion
+  +String Motivo
+}
+
+class Usuario {
+  +Guid IdUsuario
+  +String NombreUsuario
+  +String NombreCompleto
+  +List<Rol> Roles
+}
+
+class Rol {
+  +Guid IdRol
+  +String NombreRol
+  +List<String> Permisos
+}
+
+class RegistroAuditoria {
+  +Guid IdRegistro
+  +String NombreEntidad
+  +String OperacionRealizada
+  +String UsuarioResponsable
+  +DateTime FechaOperacion
+  +String DetalleCambio
+}
+
+' === RELACIONES ENTRE ENTIDADES ===
+Producto "1" -- "0..*" Lote : se_divide_en >
+Producto "1" -- "0..*" ListaPrecio : posee >
+Producto "1" -- "0..*" Proveedor : suministrado_por >
+
+Lote "1" -- "0..*" StockPorLoteSucursal : tiene_stock_en >
+Lote "0..*" -- "0..*" Movimiento : participa_en >
+Lote "0..*" -- "0..*" DetalleVenta : vendido_en >
+Lote "0..*" -- "0..*" Reserva : reservado_por >
+Lote "0..*" -- "0..*" AjusteInventario : ajustado_por >
+
+Venta "1" -- "1..*" DetalleVenta : contiene >
+
+Movimiento "0..*" -- "1" Usuario : realizado_por >
+AjusteInventario "0..*" -- "1" Usuario : autorizado_por >
+
+Usuario "1" -- "0..*" Rol : tiene >
+
+' === RELACIONES CON AUDITORÍA CLARAS ===
+RegistroAuditoria "0..*" -- "1" Venta : audita >
+RegistroAuditoria "0..*" -- "1" Movimiento : audita >
+RegistroAuditoria "0..*" -- "1" AjusteInventario : audita >
+
+@enduml

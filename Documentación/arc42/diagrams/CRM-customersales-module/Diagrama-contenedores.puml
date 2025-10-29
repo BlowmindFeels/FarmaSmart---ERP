@@ -1,0 +1,53 @@
+@startuml Contenedores_CRM_Correcto
+skinparam titleFontSize 14
+title Diagrama de Contenedores — Módulo CRM Clientes/Ventas
+
+actor "Administrador" as Admin
+actor "Cajero" as Cajero
+actor "Cliente (usuario final)" as Cliente
+
+' Contenedores principales del sistema
+rectangle "Frontend Web / POS UI\n(Browser - Admin / Cajero / Cliente)" as Frontend {
+  note right
+  Formularios: registro clientes, registro vendedores
+  Interfaz POS: búsqueda productos, carrito, checkout, impresión
+  UI debe seguir identidad visual y usabilidad mínima
+  end note
+}
+
+rectangle "Backend API (.NET / C#)\n(REST API: /clientes, /vendedores, /ventas, /inventario, /auditoria)" as Backend
+
+database "SQL Server\n( tbl_clientes, tbl_vendedores, tbl_ventas, tbl_auditoria )" as SQLServer
+
+rectangle "Cache / Índices de Búsqueda\n(para acelerar búsquedas POS e inventario)" as Cache
+
+rectangle "Servicio de Conector de Pagos\n(adapter hacia proveedor de pagos)" as PaymentConnector
+rectangle "Servicio de Generación de Comprobantes\n(prepara PDF/HTML para impresión)" as ReceiptService
+node "Proveedor de Pagos (externo)" as PagoExt
+node "Servicio de Entregas (externo - futuro uso)" as DeliveryExt
+node "Impresora / Servicio de Impresión (externo)" as PrinterExt
+
+' Interacciones
+Admin --> Frontend : Gestiona clientes y vendedores
+Cajero --> Frontend : Opera POS, procesa ventas e imprime
+Cliente --> Frontend : Registro / provee datos para entrega (futuro uso)
+
+Frontend --> Backend : Llamadas API (JSON over HTTPS)
+Backend --> SQLServer : CRUD persistente (clientes, vendedores, ventas, auditoría)
+Backend --> Cache : Lecturas rápidas para POS / inventario
+Backend --> PaymentConnector : Solicitar autorización/resultado de pago
+PaymentConnector --> PagoExt : Enviar transacción al proveedor externo
+Backend --> ReceiptService : Solicitar comprobante de venta
+ReceiptService --> PrinterExt : Preparar envío a impresora / exponer PDF/URL
+Backend --> DeliveryExt : (futuro) solicitar servicios de envío
+
+' Notas de NFR
+note bottom
+NFRs relevantes:
+· Respuestas de búsqueda/venta < 2s (cache + optimización SQL Server)
+· Auditoría: registrar usuario y fecha en altas/modificaciones
+· Unicidad email vendedor; evitar eliminar vendedor con planes de venta asociados
+· Identidad visual y ayuda contextual en Frontend
+end note
+
+@enduml

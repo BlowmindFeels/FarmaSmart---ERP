@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+actor "Gerente Comercial / RR.HH." as Gerente
+actor "Vendedor (usuario POS)" as VendedorPOS
+
+rectangle "Sistema de Gestión de Vendedores" {
+  usecase "Crear/Editar Vendedor\n(nombre, id, roles, sucursales)" as UC_CrearV
+  usecase "Asignar Usuario POS" as UC_AsignarPOS
+  usecase "Configurar Esquema de Comisión" as UC_Comision
+  usecase "Registrar Vendedor en Venta" as UC_RegistrarEnVenta
+  usecase "Generar Reporte de Desempeño\n(exportable)" as UC_Reporte
+  usecase "Definir Restricciones de Acceso" as UC_Restricciones
+}
+
+Gerente --> UC_CrearV
+Gerente --> UC_AsignarPOS
+Gerente --> UC_Comision
+Gerente --> UC_Restricciones
+Gerente --> UC_Reporte
+VendedorPOS --> UC_RegistrarEnVenta
+@enduml

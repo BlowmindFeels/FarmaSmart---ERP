@@ -1,0 +1,34 @@
+@startuml
+actor "Vendedor (POS)" as Vendedor
+participant "Interfaz POS" as POS
+participant "Servicio Ventas" as ServicioVentas
+participant "ValidadorDeDatos" as Validador
+participant "Servicio Comisiones" as ServicioComisiones
+participant "RepositorioBD Ventas" as BDVentas
+participant "RepositorioBD Comisiones" as BDComisiones
+
+Vendedor -> POS : Seleccionar productos y finalizar venta\n(Seleccionar vendedor asociado)
+POS -> ServicioVentas : Solicitar cierre de venta(datos, idVendedor)
+ServicioVentas -> Validador : Validar datos de la venta y idVendedor
+alt validación OK
+  Validador --> ServicioVentas : Validación OK
+  ServicioVentas -> ServicioComisiones : CalcularComision(idVendedor, detallesVenta)
+  ServicioComisiones --> ServicioVentas : ResultadoComision(valor, desglose)
+  ServicioVentas -> BDVentas : Guardar registro de venta con idVendedor y monto
+  alt guardado venta OK
+    BDVentas --> ServicioVentas : OK (idVenta)
+    ServicioVentas -> BDComisiones : Guardar asiento/comisión ligada a idVenta
+    BDComisiones --> ServicioVentas : OK
+    ServicioVentas --> POS : Confirmación cierre y comisión
+    POS --> Vendedor : Mostrar confirmación y monto comisión
+  else guardado venta fallo
+    BDVentas --> ServicioVentas : Error
+    ServicioVentas --> POS : Error al guardar venta
+    POS --> Vendedor : Mostrar error
+  end
+else validación fallida
+  Validador --> ServicioVentas : Errores de validación
+  ServicioVentas --> POS : Mostrar errores
+  POS --> Vendedor : Mostrar errores y cancelar cierre
+end
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+actor "Operador de Almacén" as Operador
+participant "Interfaz Movimiento" as UI
+participant "API Movimiento" as API
+participant "ValidadorDeDatos" as Validador
+participant "ServicioStock" as Servicio
+database "BaseDatosInventario" as BD
+
+Operador -> UI: Solicitar registrar movimiento (datos)
+UI -> API: POST /movimientos {datos}
+API -> Validador: validarMovimiento(datos)
+Validador --> API: resultadoValidacion (OK / errores)
+alt validación OK
+  API -> Servicio: verificarSaldoYReglas(lote, sucursal, cantidad)
+  Servicio -> BD: SELECT stock_actual FROM stock WHERE lote=... AND sucursal=...
+  BD --> Servicio: stock_actual
+  alt stock suficiente
+    Servicio -> BD: BEGIN TRANSACTION
+    Servicio -> BD: INSERT INTO movimientos (...)
+    Servicio -> BD: UPDATE stock SET cantidad = cantidad - X WHERE lote=... AND sucursal=...
+    BD --> Servicio: OK
+    Servicio -> BD: COMMIT
+    Servicio --> API: movimientoRegistrado(con_id)
+    API --> UI: respuesta OK (movimiento registrado)
+  else stock insuficiente
+    Servicio --> API: error_stock_insuficiente
+    API --> UI: mostrar error (stock insuficiente)
+  end
+else validación falla
+  API --> UI: mostrar errores de validación
+end
+@enduml

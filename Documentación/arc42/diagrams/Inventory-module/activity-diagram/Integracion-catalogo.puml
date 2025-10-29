@@ -1,0 +1,24 @@
+@startuml
+start
+:POS solicita catálogo/stock para item(s);
+:GatewaySync recibe solicitud y la pasa al ValidadorDeDatos;
+partition Validador {
+  :Validar request y permisos;
+}
+if (Validación OK?) then (sí)
+  :Consultar BaseDatosCatalogo y BaseDatosInventario;
+  :Aplicar reglas de visibilidad por sucursal y lotes disponibles;
+  :Retornar estado de disponibilidad al POS;
+  stop
+else (no)
+  :Retornar error de validación al POS;
+  stop
+endif
+
+' Flujo de venta desde POS (reserva temporal y bloqueo)
+:POS inicia venta -> GatewaySync -> ValidadorDeDatos;
+:Si stock insuficiente -> devolver alerta/bloqueo;
+:Si stock suficiente -> reservar temporalmente y confirmar venta atómica;
+:Registrar logs y métricas de latencia/errores;
+stop
+@enduml

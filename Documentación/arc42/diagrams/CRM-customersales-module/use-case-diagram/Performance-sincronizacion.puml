@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+actor "Operador de Tienda / Usuario POS" as Operador
+actor "Ingeniero de Plataforma" as Ingeniero
+
+rectangle "Módulo de Performance y Sincronización" {
+  usecase "Ejecutar pruebas de rendimiento\n(latencia, estrés, soak)" as UC_Pruebas
+  usecase "Optimizar APIs y BD" as UC_Optimizar
+  usecase "Implementar sincronización en tiempo real" as UC_Sincro
+  usecase "Configurar monitorización y alertas" as UC_Monitoreo
+  usecase "Operar en modo degradado (offline)" as UC_ModoOffline
+}
+
+Ingeniero --> UC_Pruebas
+Ingeniero --> UC_Optimizar
+Ingeniero --> UC_Sincro
+Ingeniero --> UC_Monitoreo
+Operador --> UC_ModoOffline
+@enduml

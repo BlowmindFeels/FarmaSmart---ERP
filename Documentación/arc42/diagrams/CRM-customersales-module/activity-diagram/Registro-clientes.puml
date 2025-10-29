@@ -1,0 +1,31 @@
+@startuml
+|Interfaz Cliente|
+start
+:Ingresar datos del cliente\n(NIT, direcciones, teléfonos, correos);
+:Seleccionar acción (Crear / Actualizar);
+:Enviar datos al Servicio de Clientes;
+|Servicio de Clientes|
+:Recibir petición Crear/Actualizar Cliente;
+:Normalizar datos de entrada;
+:Invocar ValidadorDeDatos para validación de formato y reglas;
+|ValidadorDeDatos|
+:Validar NIT, campos obligatorios,\nformatos de email y teléfono;
+if (Validación correcta?) then (si)
+  |Servicio de Clientes|
+  :Construir entidad Cliente válida;
+  :Registrar evento de auditoría (usuario, acción, timestamp);
+  |Repositorio BD Clientes|
+  :INSERT / UPDATE registro Cliente en BD;
+  if (Persistencia OK?) then (si)
+    |Interfaz Cliente|
+    :Mostrar confirmación: "Cliente creado/actualizado";
+  else (no)
+    |Interfaz Cliente|
+    :Mostrar error de persistencia (detalles);
+  endif
+else (no)
+  |Interfaz Cliente|
+  :Mostrar errores de validación\n(con campos y mensajes específicos);
+endif
+stop
+@enduml

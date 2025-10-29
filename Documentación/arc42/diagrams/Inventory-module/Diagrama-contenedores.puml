@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+skinparam componentStyle rectangle
+
+actor "POS (Punto de Venta) - App" as POS
+actor "Interfaz Web / Administrativa" as WebUI
+actor "Servicio Externo de Proveedores / ERP" as ERP
+
+node "Servidor de Aplicaciones" as ServApp {
+  component "API REST (Backend C#)\n- Endpoints: /productos, /movimientos, /ventas, /importar" as API
+  component "Servicio Background (C#)\n- Sincronización POS\n- Reconciliación\n- Generador de alertas" as Background
+  component "Servicio de Notificaciones (SMTP / Push)" as Notifs
+  component "Almacenamiento de Archivos (CSV/Excel)" as FileStore
+}
+
+database "SQL Server - BaseDatosInventario" as SQLServer
+
+POS --> API : Consultar catálogo y stock (tiempo real)
+POS --> Background : Cola local de ventas (offline) / sincroniza con API
+WebUI --> API : Operaciones CRUD / reportes / autorizaciones
+API --> SQLServer : Consultas y transacciones ACID
+Background --> SQLServer : Tareas programadas y reconciliación
+API --> Notifs : Enviar alertas y notificaciones
+API --> FileStore : Subir/descargar archivos de importación/exportación
+ERP --> API : Integración bidireccional (proveedores, listas de precios)
+
+note right of API
+  Contenedor principal: Backend en C#.
+  Todas las escrituras pasan por ValidadorDeDatos antes de acceder a SQL Server.
+end note
+@enduml

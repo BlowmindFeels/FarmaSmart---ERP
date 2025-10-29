@@ -1,0 +1,30 @@
+@startuml
+actor "Terminal POS" as POS
+participant "Servicio POS" as ServicioPOS
+participant "ValidadorDeDatos" as Validador
+participant "Bus de Mensajes / Cola" as Cola
+participant "Servicio Inventario" as ServicioInv
+participant "RepositorioBD Inventario" as BDInv
+
+POS -> ServicioPOS : Notificar venta completada (idVenta, items)
+ServicioPOS -> Validador : Validar integridad del mensaje y formato
+alt validación OK
+  Validador --> ServicioPOS : Validación OK
+  ServicioPOS -> Cola : Publicar evento "venta.realizada" (mensaje con items)
+  Cola -> ServicioInv : Entregar evento a consumidor de inventario
+  ServicioInv -> BDInv : Actualizar stock (UPDATE por producto)
+  alt BD OK
+    BDInv --> ServicioInv : OK
+    ServicioInv -> ServicioPOS : Confirmación consumida y stock actualizado
+    ServicioPOS --> POS : Confirmación final
+  else BD fallo
+    BDInv --> ServicioInv : Error
+    ServicioInv -> Cola : Registrar error y reintentar/reconciliar
+    ServicioInv --> ServicioPOS : Notificar inconsistencia de stock
+    ServicioPOS --> POS : Mostrar alerta de conciliación
+  end
+else validación fallo
+  Validador --> ServicioPOS : Mensaje inválido (error)
+  ServicioPOS --> POS : Notificar error y cancelar actualización
+end
+@enduml

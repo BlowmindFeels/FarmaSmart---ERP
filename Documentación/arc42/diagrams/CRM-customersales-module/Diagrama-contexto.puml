@@ -1,0 +1,36 @@
+@startuml Contexto_CRM_Clientes_Ventas
+' Estilo básico
+skinparam titleFontSize 14
+title Diagrama de Contexto — Módulo CRM Clientes/Ventas
+
+actor "Administrador" as Admin
+actor "Cajero" as Cajero
+actor "Usuario final (cliente)" as UsuarioFinal
+
+rectangle "CRM Clientes/Ventas\n(Sistema)" as CRM {
+}
+
+' Sistemas externos explícitamente referenciados en HDU
+node "Proveedor de Pagos\n(Payment Gateway)" as PagoExt
+node "Servicio de Entregas\n(para futuras entregas a domicilio)" as EntregasExt
+node "Impresora / Servicio de Impresión\n(para comprobantes)" as ImpresoraExt
+database "Base de Datos CRM" as DB
+
+' Relaciones
+Admin --> CRM : Gestiona clientes\nRegistra vendedores\nConfigura ventas
+Cajero --> CRM : Opera POS\nProcesa ventas y pagos\nImprime comprobantes
+UsuarioFinal --> CRM : Proveer datos (registro\nde cliente para entregas)
+CRM --> PagoExt : Procesar métodos de pago
+CRM --> EntregasExt : (Uso futuro) Envío/entrega de pedidos
+CRM --> ImpresoraExt : Generar e imprimir comprobantes
+CRM --> DB : Persistir clientes,\nvendedores, ventas, auditoría
+
+note right of CRM
+Funcionalidades clave (desde HDU):
+· Registro de clientes
+· Registro de vendedores (auditoría)
+· Punto de Venta (POS): búsqueda productos, cantidades, totales, pagos, impresión
+· Requerimientos no funcionales: usabilidad e identidad visual, performance POS/inventario
+end note
+
+@enduml

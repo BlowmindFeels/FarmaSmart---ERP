@@ -1,0 +1,26 @@
+@startmindmap
+* Gestión de Inventario
+** Gestión de lotes y vencimientos
+*** Registrar lote y fecha de vencimiento
+*** Mostrar información de lote y vencimiento en la UI
+*** Generar alertas de próximos a vencer
+*** Bloquear venta de productos expirados
+*** Modelado de datos: numero_lote, fecha_vencimiento
+** Registro de productos
+*** Formulario de registro (nombre, marca, lote, fecha_vencimiento, cantidad, ubicación, proveedor, código distintivo, categoría)
+*** Validaciones (campos obligatorios, formatos)
+*** Prevención de duplicados por mismo lote
+*** Generación automática de código/etiqueta (código de barras)
+*** Persistencia en base de datos
+** Actualización de stock de ventas
+*** Reducir stock al confirmar venta
+*** Validar stock antes de procesar venta (evitar sobreventa)
+*** Reflejo inmediato en inventario (sincronización en tiempo real)
+*** Manejo de concurrencia y transacciones atómicas
+** Integración POS ↔ Catálogo/Stock
+*** POS obtiene catálogo y precios desde inventario
+*** Venta en POS actualiza stock en inventario
+*** POS muestra stock actualizado antes de finalizar venta
+*** Sincronización en tiempo real o periódica (resolución de conflictos)
+*** Configuración de API / Conexión entre sistemas
+@endmindmap

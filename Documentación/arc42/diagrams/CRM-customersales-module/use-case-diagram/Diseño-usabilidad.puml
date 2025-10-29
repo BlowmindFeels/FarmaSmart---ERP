@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+actor "Usuario Final" as Usuario
+actor "Diseñador/UI" as Diseñador
+
+rectangle "Módulo de Diseño y Usabilidad" {
+  usecase "Definir Guía de Identidad Visual\n(logo, paleta, tipografías)" as UC_Guia
+  usecase "Aplicar Guía al UI del MVP" as UC_Aplicar
+  usecase "Optimizar Flujos POS\n(reducir pasos)" as UC_OptimizarFlujos
+  usecase "Realizar Pruebas de Usabilidad\n(recoger feedback)" as UC_Pruebas
+  usecase "Documentar Accesibilidad Básica" as UC_Accesibilidad
+}
+
+Diseñador --> UC_Guia
+Diseñador --> UC_Aplicar
+Diseñador --> UC_OptimizarFlujos
+Diseñador --> UC_Pruebas
+Diseñador --> UC_Accesibilidad
+Usuario --> UC_Pruebas
+@enduml

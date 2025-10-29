@@ -1,0 +1,26 @@
+@startuml
+start
+:Ingresar datos del movimiento\n(producto, sucursal, lote, fecha_vencimiento, cantidad, tipo);
+:Enviar datos al ValidadorDeDatos;
+partition Validador {
+  :Validar campos obligatorios y formatos;
+  :Validar fecha_vencimiento y reglas de caducidad;
+}
+if (Validación OK?) then (sí)
+  :Comprobar saldo disponible por lote y sucursal;
+  if (Saldo suficiente?) then (sí)
+    :Iniciar transacción en BaseDatosInventario;
+    :Registrar movimiento (movimientos, trazabilidad);
+    :Actualizar stock por lote y sucursal;
+    :Cerrar transacción (COMMIT);
+    :Notificar éxito al usuario;
+    stop
+  else (no)
+    :Notificar error: stock insuficiente;
+    stop
+  endif
+else (no)
+  :Retornar errores de validación con detalle;
+  stop
+endif
+@enduml

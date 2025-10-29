@@ -1,0 +1,41 @@
+@startuml
+actor "Gestor de Inventario" as Gestor
+participant "Interfaz Producto" as UI
+participant "API Producto" as API
+participant "ValidadorDeDatos" as Validador
+participant "ServicioProducto" as Servicio
+database "BaseDatosProductos" as BD
+participant "ProcesadorImportacion" as Importador
+
+Gestor -> UI: Crear/Editar producto (datos)
+UI -> API: POST /productos {datos}
+API -> Validador: validarProducto(datos)
+Validador --> API: OK / errores
+alt validación OK
+  API -> Servicio: comprobarDuplicados(codigo_interno, UPC)
+  Servicio -> BD: SELECT id FROM productos WHERE codigo_interno=... OR UPC=...
+  BD --> Servicio: resultadoDuplicado
+  alt sin duplicado
+    Servicio -> BD: INSERT/UPDATE producto (...)
+    BD --> Servicio: OK
+    Servicio --> API: OK (producto guardado)
+    API --> UI: mostrar éxito
+  else duplicado
+    Servicio --> API: alerta_duplicado
+    API --> UI: mostrar opciones (fusionar/omitir)
+  end
+else validación falla
+  API --> UI: mostrar errores de validación
+end
+
+' --- Flujo de importación masiva ---
+Gestor -> UI: Subir archivo CSV/Excel
+UI -> Importador: enviarArchivo(archivo)
+Importador -> Validador: validarLoteFilas(lote)
+Validador --> Importador: reportesPorFila (OK / errores)
+Importador -> Servicio: procesarFilasValidadas
+loop por fila válida
+  Servicio -> BD: INSERT/UPDATE producto(...)
+end
+Importador --> UI: reporteImportacion(con filas aceptadas/rechazadas y errores)
+@enduml

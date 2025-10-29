@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+actor "Vendedor / Administrador\nComercial" as ActorComercial
+actor "Importador (usuario)\n(admin/operador)" as Importador
+
+rectangle "Sistema de Gestión Comercial" {
+  usecase "Crear Cliente\n(NIT, direcciones, contactos)" as UC_Crear
+  usecase "Leer / Ver Ficha de Cliente\n(historial y saldos)" as UC_VerFicha
+  usecase "Actualizar Cliente\n(NIT, direcciones, contactos)" as UC_Actualizar
+  usecase "Eliminar Cliente" as UC_Eliminar
+  usecase "Configurar Condiciones\nde Crédito" as UC_Credito
+  usecase "Asociar Programa de Fidelidad" as UC_Fidelidad
+  usecase "Importar/Actualizar clientes\n(vía CSV/Excel)" as UC_Importar
+}
+
+ActorComercial --> UC_Crear
+ActorComercial --> UC_VerFicha
+ActorComercial --> UC_Actualizar
+ActorComercial --> UC_Eliminar
+ActorComercial --> UC_Credito
+ActorComercial --> UC_Fidelidad
+
+Importador --> UC_Importar
+@enduml

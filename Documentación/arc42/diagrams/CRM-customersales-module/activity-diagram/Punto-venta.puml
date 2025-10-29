@@ -1,0 +1,48 @@
+@startuml
+|Terminal POS (Interfaz)|
+start
+:Escanear o buscar productos;
+:Agregar ítems al carrito;
+:Aplicar descuentos o promociones (si aplica);
+:Seleccionar método(s) de pago y vendedor asociado;
+:Confirmar venta (Iniciar cierre);
+:Enviar petición de cierre al Servicio POS;
+|Servicio POS|
+:Recibir solicitud de cierre de venta;
+:Normalizar datos de venta y totales;
+:Invocar ValidadorDeDatos para validar stock, precios,\npromociones y pagos;
+|ValidadorDeDatos|
+:Verificar disponibilidad de stock,\nvalidar reglas de promoción y datos de pago;
+if (Validación correcta?) then (si)
+  |Servicio POS|
+  :Reservar stock temporalmente (bloqueo corto);
+  :Crear entidad Venta para persistencia;
+  |Repositorio BD Ventas|
+  :INSERT registro de Venta y pagos;
+  if (Registro Venta OK?) then (si)
+    |Servicio POS|
+    :Confirmar persistencia de venta;
+    :Actualizar stock definitivo por cada ítem;
+    |Repositorio BD Inventario|
+    :UPDATE stock por producto;
+    if (Actualizar stock OK?) then (si)
+      |Terminal POS (Interfaz)|
+      :Emitir comprobante / recibo y mostrar éxito;
+    else (no)
+      |Servicio POS|
+      :Registrar inconsistencia de stock y generar tarea de conciliación;
+      |Terminal POS (Interfaz)|
+      :Mostrar alerta de conciliación y opciones (reversar/conciliar);
+    endif
+  else (no)
+    |Servicio POS|
+    :Liberar stock temporal;
+    |Terminal POS (Interfaz)|
+    :Mostrar error al guardar la venta;
+  endif
+else (no)
+  |Terminal POS (Interfaz)|
+  :Mostrar errores de validación (stock insuf., pago inválido, promo inválida);
+endif
+stop
+@enduml

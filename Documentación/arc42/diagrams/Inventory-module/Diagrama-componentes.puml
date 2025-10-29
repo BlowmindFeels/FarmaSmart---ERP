@@ -1,0 +1,71 @@
+@startuml
+left to right direction
+skinparam componentStyle rectangle
+
+package "Backend C# (Módulo de Inventario)" {
+  [ControllerProductos] as CtrlProductos
+  [ControllerMovimientos] as CtrlMovimientos
+  [ControllerVentas] as CtrlVentas
+  [ControllerImportacion] as CtrlImportacion
+  [ServicioProductos] as SvcProductos
+  [ServicioInventario] as SvcInventario
+  [ServicioVentas] as SvcVentas
+  [ServicioReservas] as SvcReservas
+  [ServicioReconciliacion] as SvcReconciliacion
+  [ServicioAlertas] as SvcAlertas
+  [ValidadorDeDatos] as Validador
+  [RepositorioProducto (SQL)] as RepoProducto
+  [RepositorioLote (SQL)] as RepoLote
+  [RepositorioStock (SQL)] as RepoStock
+  [RepositorioMovimiento (SQL)] as RepoMovimiento
+  [RepositorioVenta (SQL)] as RepoVenta
+  [RepositorioAjusteAudit (SQL)] as RepoAudit
+  [TransactionManager (SQL Server)] as TxManager
+  [BusDeMensajes / Evento] as MessageBus
+  [AlmacenamientoArchivos] as FileStore
+}
+
+' Flujos principales
+CtrlProductos --> Validador : validarDatosProducto(...)
+CtrlProductos --> SvcProductos : solicitarCrearActualizar(...)
+SvcProductos --> RepoProducto : guardarProducto(...)
+RepoProducto --> TxManager : ejecutarComandoSQL(...)
+TxManager --> RepoProducto : resultado
+
+CtrlMovimientos --> Validador : validarMovimiento(...)
+CtrlMovimientos --> SvcInventario : registrarMovimiento(...)
+SvcInventario --> SvcReservas : reservarStockTemporal(...)
+SvcReservas --> RepoStock : consultarYBloquearStock(...) 
+SvcInventario --> RepoMovimiento : insertarMovimiento(...)
+SvcInventario --> RepoStock : actualizarStock(...)
+SvcInventario --> RepoAudit : registrarAuditoria(...)
+
+CtrlVentas --> Validador : validarVenta(...)
+CtrlVentas --> SvcVentas : procesarVentaAtomica(...)
+SvcVentas --> SvcReservas : reservarStockTemporal(...)
+SvcVentas --> RepoVenta : guardarVenta(...)
+SvcVentas --> MessageBus : publicarEventoVenta(...)
+Background ..> MessageBus : suscribirEventosParaSincronizacion()
+
+CtrlImportacion --> Validador : validarArchivoImportacion(...)
+CtrlImportacion --> FileStore : almacenarArchivo(...)
+CtrlImportacion --> SvcProductos : procesarImportacionMasiva(...)
+
+SvcReconciliacion --> RepoMovimiento : obtenerTransaccionesParaReconciliar(...)
+SvcAlertas --> RepoStock : revisarLotesProximosAVencer(...)
+SvcAlertas --> Notifs : enviarAlertas(...)
+
+' Acceso a la BD
+RepoProducto --> SQLServer
+RepoLote --> SQLServer
+RepoStock --> SQLServer
+RepoMovimiento --> SQLServer
+RepoVenta --> SQLServer
+RepoAudit --> SQLServer
+
+note bottom
+  - ValidadorDeDatos es llamado por todos los Controllers antes de invocar servicios/repositorios.
+  - TxManager maneja transacciones ACID sobre SQL Server (COMMIT/ROLLBACK).
+  - MessageBus facilita sincronización y reintentos entre sucursales / POS offline.
+end note
+@enduml

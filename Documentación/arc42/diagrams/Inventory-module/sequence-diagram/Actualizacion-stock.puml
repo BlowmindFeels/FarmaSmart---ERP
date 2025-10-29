@@ -1,0 +1,47 @@
+@startuml
+actor "POS" as POS
+participant "Interfaz POS" as UI
+participant "ServicioVentas" as Servicio
+participant "ValidadorDeDatos" as Validador
+participant "GestorReservas" as Reservas
+database "BaseDatosInventario" as BD
+participant "ColaLocalOffline" as ColaOffline
+participant "ServicioReconciliacion" as Reconciliacion
+
+POS -> UI: Iniciar venta (items, lote?, sucursal)
+UI -> Servicio: POST /ventas {venta}
+Servicio -> Validador: validarVenta(venta)
+Validador --> Servicio: OK / errores
+alt validación OK
+  Servicio -> Reservas: reservarStockTemporal(lote, sucursal, cantidad)
+  Reservas -> BD: SELECT stock_actual FOR UPDATE WHERE lote=... AND sucursal=...
+  BD --> Reservas: stock_actual
+  alt reserva posible
+    Servicio -> BD: BEGIN TRANSACTION
+    Servicio -> BD: INSERT INTO ventas(...)
+    Servicio -> BD: UPDATE stock SET cantidad = cantidad - X WHERE lote=... AND sucursal=...
+    BD --> Servicio: OK
+    Servicio -> BD: COMMIT
+    Servicio --> UI: confirmarVenta (idVenta)
+    UI --> POS: mostrar confirmación
+  else reserva fallida
+    alt POS en modo offline
+      Servicio -> ColaOffline: encolarVenta(venta)
+      ColaOffline --> Servicio: ackEncolado
+      Servicio --> UI: notificarVentaEncolada
+    else (no offline)
+      Servicio --> UI: error_stock_insuficiente (o solicitar autorizacion)
+    end
+  end
+else validación falla
+  Servicio --> UI: erroresValidacion
+end
+
+' --- Sincronización offline ---
+note right of ColaOffline
+  Cuando el POS reconecta:
+  - ColaLocalOffline -> ServicioVentas: reenviar ventas encoladas
+  - ServicioReconciliacion detecta conflictos (ej. stock ya consumido)
+  - Genera reporte de conflicto y solicita intervención manual
+end note
+@enduml

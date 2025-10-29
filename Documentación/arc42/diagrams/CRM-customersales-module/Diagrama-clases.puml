@@ -1,0 +1,216 @@
+@startuml Diagrama_Clases_CRM_Conexo
+' Diagrama de Clases — Módulo CRM Clientes/Ventas (C# / SQL Server)
+' Objetivo: nombres descriptivos, relaciones lógicas completas, alineado con las HDU.
+skinparam classAttributeIconSize 0
+title Diagrama de Clases — CRM Clientes/Ventas (Clarificado y Conexo)
+
+' =====================
+' ENTIDADES DE DOMINIO
+' =====================
+class Cliente {
+  +int ClienteId
+  +string NombreCompleto
+  +string Cedula
+  +string Telefono
+  +string Email
+  +DateTime FechaCreacion
+  +DateTime FechaUltimaModificacion
+  --
+  +void ValidarCamposObligatorios()
+}
+
+class Vendedor {
+  +int VendedorId
+  +string NombreCompleto
+  +string EmailCorporativo
+  +string PaisAsignado
+  +string Estado           ' e.g. "ACTIVO","INACTIVO"
+  +DateTime FechaCreacion
+  +DateTime FechaUltimaModificacion
+  --
+  +void ValidarCamposObligatorios()
+  +bool PuedeEliminarse()  ' verifica dependencias (planes de venta)
+}
+
+class Producto {
+  +int ProductoId
+  +string Codigo
+  +string Nombre
+  +decimal PrecioUnitario
+  +int StockDisponible
+  --
+  +bool ReservarStock(cantidad:int):bool
+  +void ActualizarStock(delta:int)
+}
+
+class OrdenVenta {
+  +int OrdenVentaId
+  +DateTime Fecha
+  +int? ClienteId
+  +int? VendedorId
+  +decimal Subtotal
+  +decimal Impuestos
+  +decimal Total
+  +string MetodoPago
+  +string Estado                ' e.g. "PENDIENTE","COMPLETADA"
+  --
+  +void AgregarLinea(linea:LineaOrden)
+  +decimal CalcularTotales():decimal
+  +void MarcarComoCompletada()
+}
+
+class LineaOrden {
+  +int LineaOrdenId
+  +int ProductoId
+  +int Cantidad
+  +decimal PrecioUnitario
+  +decimal Subtotal()
+}
+
+class RegistroAuditoria {
+  +int AuditoriaId
+  +string Entidad          ' "Cliente","Vendedor","OrdenVenta"
+  +int EntidadId
+  +string Usuario
+  +DateTime Fecha
+  +string Accion           ' "CREAR","MODIFICAR","ELIMINAR"
+  +string Detalle
+}
+
+' =====================
+' REPOSITORIOS (INTERFACES)
+' =====================
+interface IClienteRepositorio {
+  +Cliente ObtenerPorId(id:int)
+  +bool Guardar(cliente:Cliente)
+  +bool ExisteCedula(cedula:string)
+}
+
+interface IVendedorRepositorio {
+  +Vendedor ObtenerPorId(id:int)
+  +bool Guardar(vendedor:Vendedor)
+  +bool EmailExiste(email:string)
+  +bool TienePlanesVenta(vendedorId:int)
+}
+
+interface IProductoRepositorio {
+  +Producto ObtenerPorCodigo(codigo:string)
+  +List<Producto> BuscarPorNombre(q:string)
+  +bool ActualizarStock(productoId:int, delta:int)
+}
+
+interface IOrdenVentaRepositorio {
+  +bool Guardar(orden:OrdenVenta)
+  +OrdenVenta ObtenerPorId(id:int)
+}
+
+interface IAuditoriaRepositorio {
+  +bool Guardar(registro:RegistroAuditoria)
+}
+
+' =====================
+' SERVICIOS / ADAPTADORES (CAPA APLICACIÓN)
+' =====================
+class ServicioClientes {
+  +Cliente CrearCliente(cliente:Cliente, usuario:string)
+  +Cliente ObtenerCliente(id:int)
+  +void ValidarYRegistrar(cliente:Cliente, usuario:string)
+}
+
+class ServicioVendedores {
+  +Vendedor CrearVendedor(vendedor:Vendedor, usuario:string)
+  +bool EliminarVendedor(vendedorId:int, usuario:string)
+  +Vendedor ObtenerVendedor(id:int)
+}
+
+class ServicioInventario {
+  +Producto BuscarPorCodigo(codigo:string)
+  +List<Producto> BuscarPorNombre(q:string)
+  +bool ReservarStock(productoId:int, cantidad:int)
+  +void LiberarReserva(productoId:int, cantidad:int)
+}
+
+class ServicioVentas {
+  +OrdenVenta CrearOrden(clienteId:int?, vendedorId:int?)
+  +LineaOrden AgregarLineaAOrden(ordenId:int, codigoProducto:string, cantidad:int)
+  +bool FinalizarOrden(ordenId:int, metodoPago:string, datosPago:object, usuario:string)
+  +string GenerarComprobante(ordenId:int):string
+}
+
+class AdaptadorPasarelaPago {
+  +bool AutorizarPago(orden:OrdenVenta, datosPago:object)
+}
+
+class GeneradorComprobante {
+  +string GenerarPDF(orden:OrdenVenta) ' devuelve ruta o URL
+}
+
+class ServicioAuditoria {
+  +void Registrar( entidad:string, entidadId:int, usuario:string, accion:string, detalle:string)
+}
+
+' =====================
+' DEPENDENCIAS / RELACIONES LÓGICAS
+' =====================
+' Entidades a orden/linea
+OrdenVenta "1" *-- "1..*" LineaOrden : "contiene"
+LineaOrden "1" --> "1" Producto : "refiere a"
+
+' Asociaciones cliente / vendedor
+Cliente "1" <-- "0..*" OrdenVenta : "cliente asociado (opcional)"
+Vendedor "1" <-- "0..*" OrdenVenta : "vendedor asignado (opcional)"
+
+' Auditoría relacionando entidades
+RegistroAuditoria ..> Cliente : "documenta cambios en"
+RegistroAuditoria ..> Vendedor : "documenta cambios en"
+RegistroAuditoria ..> OrdenVenta : "documenta cambios en"
+
+' Servicios usan repositorios y adaptadores
+ServicioClientes ..> IClienteRepositorio
+ServicioClientes ..> IAuditoriaRepositorio
+ServicioClientes ..> ServicioAuditoria : "registrar auditoría"
+
+ServicioVendedores ..> IVendedorRepositorio
+ServicioVendedores ..> IAuditoriaRepositorio
+ServicioVendedores ..> ServicioAuditoria : "registrar auditoría"
+
+ServicioInventario ..> IProductoRepositorio
+
+ServicioVentas ..> IOrdenVentaRepositorio
+ServicioVentas ..> IProductoRepositorio
+ServicioVentas ..> AdaptadorPasarelaPago
+ServicioVentas ..> GeneradorComprobante
+ServicioVentas ..> IAuditoriaRepositorio
+ServicioVentas ..> ServicioInventario : "reservar stock y validar disponibilidad"
+ServicioVentas ..> ServicioAuditoria : "registrar auditoría de la venta"
+
+AdaptadorPasarelaPago ..> "Proveedor de Pagos (externo)" : "envía solicitud de autorización"
+GeneradorComprobante ..> "Servicio de Impresión / Almacenamiento" : "genera PDF/URL"
+
+' Repositorios persisten en SQL Server
+IClienteRepositorio ..> "SQL Server (tbl_clientes)" : "persistencia"
+IVendedorRepositorio ..> "SQL Server (tbl_vendedores)" : "persistencia"
+IProductoRepositorio ..> "SQL Server (tbl_productos)" : "persistencia"
+IOrdenVentaRepositorio ..> "SQL Server (tbl_ordenes, tbl_lineasorden)" : "persistencia"
+IAuditoriaRepositorio ..> "SQL Server (tbl_auditoria)" : "persistencia"
+
+' =====================
+' MÉTODOS/RESPONSABILIDADES RELEVANTES (NOTAS)
+' =====================
+note left
+Mapeo claro a las HDU:
+- Registro de clientes: Cliente + ServicioClientes + IClienteRepositorio + Auditoría.
+- Registro de vendedores: Vendedor + ServicioVendedores + IVendedorRepositorio + verificación de eliminación (TienePlanesVenta).
+- POS: OrdenVenta, LineaOrden, ServicioVentas, ServicioInventario, AdaptadorPasarelaPago, GeneradorComprobante.
+- Auditoría: ServicioAuditoria + IAuditoriaRepositorio.
+- Performance: ServicioInventario puede usar índices/cache (no modelado explícitamente aquí).
+end note
+
+note right
+Tecnologías indicadas:
+- Backend: C# (.NET) — pattern: Services + Repositories + Domain Entities.
+- Persistencia: SQL Server (tablas indicadas).
+- Repositorios implementan persistencia con EF Core / ADO.NET.
+end note
+
+@enduml

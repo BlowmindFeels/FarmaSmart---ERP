@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+actor "Vendedor" as Vendedor
+actor "Administrador" as Admin
+
+rectangle "Interfaz POS" {
+  usecase "Buscar/Escanear Producto" as UC_Buscar
+  usecase "Aplicar Descuento / Promoción" as UC_Descuento
+  usecase "Registrar Venta (múltiples pagos)" as UC_Venta
+  usecase "Registrar Devolución" as UC_Devolucion
+  usecase "Cierre de Caja Diario" as UC_CierreCaja
+  usecase "Operar en Modo Degradado (offline)" as UC_Offline
+}
+
+Vendedor --> UC_Buscar
+Vendedor --> UC_Descuento
+Vendedor --> UC_Venta
+Vendedor --> UC_Devolucion
+Vendedor --> UC_CierreCaja
+Vendedor --> UC_Offline
+Admin --> UC_Descuento
+Admin --> UC_CierreCaja
+@enduml

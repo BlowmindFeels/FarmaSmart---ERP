@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+actor "Sistema POS / Punto de Venta" as POS
+actor "Encargado de Inventario" as Encargado
+
+package "Actualización de stock por ventas" {
+  usecase "Registrar venta atómica y decrementar stock" as UC_RegistrarVentaAtomica
+  usecase "Decrementar stock por lote y ubicación" as UC_DecrementarPorLote
+  usecase "Ventas offline y sincronización" as UC_VentasOffline
+  usecase "Reconciliación y reporte de conflictos" as UC_Reconciliacion
+  usecase "Autorizar ventas que generan saldo negativo" as UC_AutorizarNegativos
+}
+
+POS --> UC_RegistrarVentaAtomica
+POS --> UC_DecrementarPorLote
+POS --> UC_VentasOffline
+Encargado --> UC_Reconciliacion
+Encargado --> UC_AutorizarNegativos
+UC_RegistrarVentaAtomica .> UC_DecrementarPorLote : <<incluye>>
+UC_VentasOffline .> UC_Reconciliacion : <<incluye>>
+@enduml

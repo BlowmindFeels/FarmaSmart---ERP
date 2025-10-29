@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+actor "Sistema POS" as POS
+actor "Administrador / Operaciones" as Admin
+
+package "Integración POS <-> Catálogo y Stock" {
+  usecase "Consultar catálogo y stock en tiempo real" as UC_ConsultarCatalogo
+  usecase "Actualizar stock tras venta" as UC_ActualizarStock
+  usecase "Bloquear venta por stock insuficiente" as UC_BloquearVenta
+  usecase "Sincronización bidireccional multi-sucursal" as UC_SincronizacionBidireccional
+  usecase "Monitorizar logs y métricas de sincronización" as UC_Monitorizacion
+  usecase "Resolver conflictos de sincronización" as UC_ResolverConflictos
+}
+
+POS --> UC_ConsultarCatalogo
+POS --> UC_ActualizarStock
+POS --> UC_BloquearVenta
+Admin --> UC_SincronizacionBidireccional
+Admin --> UC_Monitorizacion
+Admin --> UC_ResolverConflictos
+UC_ActualizarStock .> UC_ConsultarCatalogo : <<incluye>>
+UC_SincronizacionBidireccional .> UC_ResolverConflictos : <<incluye>>
+@enduml

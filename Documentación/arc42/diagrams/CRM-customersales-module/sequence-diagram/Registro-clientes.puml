@@ -1,0 +1,28 @@
+@startuml
+actor "Vendedor/Administrador" as Usuario
+participant "Interfaz Web/Móvil" as Interfaz
+participant "Servicio de Negocio\nClientes" as Servicio
+participant "ValidadorDeDatos" as Validador
+participant "RepositorioBD (Clientes)" as BD
+
+Usuario -> Interfaz : Completa formulario cliente\n(NIT, direcciones, contactos)
+Interfaz -> Servicio : Enviar petición CrearCliente(datos)
+Servicio -> Validador : ValidarDatosCliente(datos)
+alt validación correcta
+  Validador --> Servicio : Validación OK
+  Servicio -> BD : Crear/Actualizar registro cliente
+  alt persistencia OK
+    BD --> Servicio : OK (id cliente)
+    Servicio --> Interfaz : Resultado: Cliente creado
+    Interfaz --> Usuario : Mostrar confirmación
+  else persistencia fallo
+    BD --> Servicio : Error BD
+    Servicio --> Interfaz : Error de guardado
+    Interfaz --> Usuario : Mostrar error
+  end
+else validación fallo
+  Validador --> Servicio : Errores de validación (lista)
+  Servicio --> Interfaz : Errores de validación
+  Interfaz --> Usuario : Mostrar campos con error
+end
+@enduml

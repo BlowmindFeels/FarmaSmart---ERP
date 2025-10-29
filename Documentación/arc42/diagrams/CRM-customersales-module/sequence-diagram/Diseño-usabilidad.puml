@@ -1,0 +1,25 @@
+@startuml
+actor "Diseñador / Admin UI" as Admin
+participant "Panel Admin UI" as Panel
+participant "Servicio UI" as ServicioUI
+participant "ValidadorDeDatos" as Validador
+participant "RepositorioBD UI" as BDUI
+participant "Sistema Staging" as Staging
+
+Admin -> Panel : Subir logo, paleta y tipografías
+Panel -> ServicioUI : Enviar configuración visual
+ServicioUI -> Validador : Validar accesibilidad y formatos
+alt validación OK
+  Validador --> ServicioUI : OK
+  ServicioUI -> BDUI : Guardar guía visual
+  BDUI --> ServicioUI : OK
+  ServicioUI -> Staging : Desplegar recursos para pruebas de usabilidad
+  Staging --> ServicioUI : Resultado pruebas y métricas
+  ServicioUI --> Panel : Mostrar resultados y feedback
+  Panel --> Admin : Confirmación y métricas
+else validación fallo
+  Validador --> ServicioUI : Errores de validación (ej. contraste)
+  ServicioUI --> Panel : Mostrar errores
+  Panel --> Admin : Mostrar errores y sugerencias
+end
+@enduml

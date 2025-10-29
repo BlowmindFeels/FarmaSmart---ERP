@@ -1,0 +1,40 @@
+@startuml
+|Panel Administración UI|
+start
+:Subir/Definir recursos de identidad\n(logo, paleta, tipografías, variantes);
+:Seleccionar módulos y pantallas donde aplicar la guía;
+:Enviar configuración visual al Servicio UI;
+|Servicio UI|
+:Recibir configuración visual;
+:Normalizar recursos (formatos, tamaños);
+:Invocar ValidadorDeDatos para validar accesibilidad y formatos;
+|ValidadorDeDatos|
+:Validar contraste mínimo, tamaños de fuente,\nformatos de imagen y archivos de fuentes;
+if (Validación correcta?) then (si)
+  |Servicio UI|
+  :Persistir guía de identidad en Repositorio UI;
+  |Repositorio BD UI|
+  :INSERT / UPDATE Guía Visual;
+  if (Persistencia OK?) then (si)
+    |Servicio UI|
+    :Desplegar cambios en entorno de staging para pruebas;
+    :Ejecutar pruebas de usabilidad con usuarios objetivo;
+    :Recolectar métricas de usabilidad (tiempo en tarea, errores);
+    if (Feedback indica ajustes?) then (si)
+      |Panel Administración UI|
+      :Iterar ajustes en guía y flujos;
+      ->|Servicio UI| :Enviar nueva versión para validar de nuevo;
+    else (no)
+      |Panel Administración UI|
+      :Aprobar despliegue a producción y documentar accesibilidad básica;
+    endif
+  else (no)
+    |Panel Administración UI|
+    :Mostrar error de persistencia (detalles);
+  endif
+else (no)
+  |Panel Administración UI|
+  :Mostrar errores de validación (contraste, tamaños, formatos);
+endif
+stop
+@enduml

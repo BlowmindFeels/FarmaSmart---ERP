@@ -1,0 +1,31 @@
+@startmindmap
+* Módulo CRM Clientes/Ventas
+** Registro de Clientes
+*** Capturar datos (nombre, cédula, teléfono, email, ...)
+*** Validar campos obligatorios y formatos
+*** Persistir datos en SQL Server (tbl_clientes)
+*** Mostrar notificación de éxito/error
+** Registro de Vendedores
+*** Capturar datos obligatorios (nombre completo, email corporativo, país, estado)
+*** Validar unicidad de email corporativo
+*** Restringir eliminación si existen planes de venta asociados
+*** Registrar auditoría (usuario, fecha) en creación/modificación
+** Punto de Venta (POS)
+*** Buscar productos por código o nombre
+*** Añadir items al carrito / registrar cantidad por artículo
+*** Calcular total de la venta (incluyendo impuestos)
+*** Procesar métodos de pago (efectivo, tarjeta, otros)
+*** Generar y preparar comprobante para impresión
+** NF — Usabilidad e identidad visual mínima
+*** Interfaz intuitiva con navegación clara
+*** Aplicar identidad visual (colores, tipografía, logo)
+*** Minimizar elementos innecesarios; focalizar tarea del usuario
+*** Incluir ayuda contextual o breve tutorial para nuevos usuarios
+** NF — Performance POS e Inventario
+*** Responder búsquedas y transacciones en < 2s bajo carga
+*** Soportar múltiples transacciones concurrentes sin degradación
+*** Optimizar consultas SQL Server y configurar índices
+*** Implementar caché para datos consultados frecuentemente
+*** Realizar pruebas de carga y monitoreo de métricas
+
+@endmindmap

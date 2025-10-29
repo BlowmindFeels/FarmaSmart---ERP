@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+actor "Gestor de Inventario" as Gestor
+
+package "Gestión de productos" {
+  usecase "Crear/Editar/Eliminar producto" as UC_CRUDProducto
+  usecase "Buscar producto por código interno o UPC" as UC_BuscarProducto
+  usecase "Importación masiva CSV/Excel con validación" as UC_ImportacionMasiva
+  usecase "Asociar proveedores y listas de precios" as UC_AsociarProveedoresPrecios
+  usecase "Detectar y gestionar duplicados" as UC_GestionDuplicados
+}
+
+Gestor --> UC_CRUDProducto
+Gestor --> UC_BuscarProducto
+Gestor --> UC_ImportacionMasiva
+Gestor --> UC_AsociarProveedoresPrecios
+UC_ImportacionMasiva .> UC_GestionDuplicados : <<incluye>>
+UC_CRUDProducto .> UC_GestionDuplicados : <<incluye>>
+@enduml

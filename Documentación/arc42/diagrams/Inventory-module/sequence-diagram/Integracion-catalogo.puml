@@ -1,0 +1,50 @@
+@startuml
+actor "POS" as POS
+participant "GatewaySync POS" as Gateway
+participant "ValidadorDeDatos" as Validador
+participant "ServicioCatalogo" as Catalogo
+participant "ServicioStock" as Stock
+database "BaseDatosCatalogo" as BD_Catalogo
+database "BaseDatosInventario" as BD_Inv
+participant "MonitorLogs" as Monitor
+participant "ServicioConflictos" as Conflictos
+
+POS -> Gateway: GET /catalogo?sku=...
+Gateway -> Validador: validarConsultaCatalogo(params)
+Validador --> Gateway: OK / errores
+alt OK
+  Gateway -> Catalogo: consultarProducto(sku)
+  Catalogo -> BD_Catalogo: SELECT * FROM productos WHERE sku=...
+  BD_Catalogo --> Catalogo: datosProducto
+  Gateway -> Stock: consultarDisponibilidad(sku, sucursal)
+  Stock -> BD_Inv: SELECT stock_por_lote WHERE sku=... AND sucursal=...
+  BD_Inv --> Stock: stockLotes
+  Stock --> Gateway: disponibilidad
+  Gateway --> POS: datosProducto + disponibilidad
+else errores
+  Gateway --> POS: errores de validación
+end
+
+' --- Venta que actualiza stock ---
+POS -> Gateway: POST /ventas {venta}
+Gateway -> Validador: validarVenta(venta)
+Validador --> Gateway: OK/errores
+alt OK
+  Gateway -> Stock: reservarYActualizar(lote?, sucursal, cantidad)
+  Stock -> BD_Inv: BEGIN; SELECT FOR UPDATE ...; UPDATE stock ...
+  BD_Inv --> Stock: resultado
+  Stock -> BD_Inv: COMMIT
+  Stock --> Gateway: confirmacionActualizacion
+  Gateway -> Monitor: registrarLog(transaccion, latencia, resultado)
+  Gateway --> POS: confirmarVenta
+else errores
+  Gateway --> POS: errorValidacion
+end
+
+' --- Sincronización bidireccional y conflictos ---
+note right
+  - Cambios desde panel central o desde POS se propagan via GatewaySync.
+  - ServicioConflictos aplica políticas (last-write, prioridad sucursal, merge manual).
+  - MonitorLogs almacena métricas de latencia y errores.
+end note
+@enduml

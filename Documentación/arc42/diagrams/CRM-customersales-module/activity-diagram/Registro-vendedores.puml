@@ -1,0 +1,31 @@
+@startuml
+|Panel RR.HH. / Gerente|
+start
+:Ingresar datos del vendedor\n(nombre, identificador, sucursales, rol, usuario POS opcional);
+:Seleccionar esquema de comisión (fijo / por producto / por objetivo);
+:Enviar datos al Servicio de Vendedores;
+|Servicio de Vendedores|
+:Recibir petición Crear/Editar Vendedor;
+:Normalizar datos y reglas de comisión;
+:Invocar ValidadorDeDatos para validar identificador,\nusuario POS y reglas de comisión;
+|ValidadorDeDatos|
+:Validar unicidad del identificador, formato de usuario POS,\nporcentajes y parámetros de comisión;
+if (Validación correcta?) then (si)
+  |Servicio de Vendedores|
+  :Construir entidad Vendedor y esquema de comisión;
+  :Registrar auditoría de cambios;
+  |Repositorio BD Vendedores|
+  :INSERT / UPDATE Vendedor y Esquema de Comisión;
+  if (Persistencia OK?) then (si)
+    |Panel RR.HH. / Gerente|
+    :Mostrar confirmación: "Vendedor creado/actualizado";
+  else (no)
+    |Panel RR.HH. / Gerente|
+    :Mostrar error de persistencia (detalles);
+  endif
+else (no)
+  |Panel RR.HH. / Gerente|
+  :Mostrar errores de validación (campos y reglas);
+endif
+stop
+@enduml
