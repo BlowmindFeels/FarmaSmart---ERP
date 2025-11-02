@@ -81,6 +81,10 @@
       <Project>{65a424fc-6381-45bf-bf69-db3fb1027fef}</Project>
       <Name>FarmaSmart.BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FarmaSmart.DAL\FarmaSmart.DAL.csproj">
+      <Project>{4497f385-9c6f-446c-a5cc-c4e2561991cd}</Project>
+      <Name>FarmaSmart.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FarmaSmart.Models\FarmaSmart.Models.csproj">
       <Project>{72e84597-55c5-495e-9b56-b7661d78898f}</Project>
       <Name>FarmaSmart.Models</Name>

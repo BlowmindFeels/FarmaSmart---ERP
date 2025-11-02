@@ -41,7 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BLL_Employee.cs" />
+    <Compile Include="BLL_UserRole.cs" />
+    <Compile Include="BLL_User.cs" />
+    <Compile Include="BLL_RolePermission.cs" />
+    <Compile Include="BLL_Permission.cs" />
+    <Compile Include="BLL_Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -16,5 +16,19 @@ namespace FarmaSmart___ERP__Main_
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            var ctx = new FarmaSmartERP.DAL.FarmaSmartContext();
+            string error;
+            if (ctx.ProbarConexion(out error))
+            {
+                MessageBox.Show("Conexión OK", "Conexión", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(error, "Error conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

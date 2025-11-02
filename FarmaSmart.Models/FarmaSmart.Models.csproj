@@ -41,16 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="M_StockMovement.cs" />
-    <Compile Include="M_Inventory.cs" />
-    <Compile Include="M_Product.cs" />
-    <Compile Include="M_ProductCategory.cs" />
-    <Compile Include="M_Supplier.cs" />
-    <Compile Include="M_Costumer.cs" />
+    <Compile Include="Suppliers vs Products\M_StockMovement.cs" />
+    <Compile Include="Suppliers vs Products\M_Inventory.cs" />
+    <Compile Include="Suppliers vs Products\M_Product.cs" />
+    <Compile Include="Suppliers vs Products\M_ProductCategory.cs" />
+    <Compile Include="Suppliers vs Products\M_Supplier.cs" />
+    <Compile Include="Costumers\M_Costumer.cs" />
     <Compile Include="AuthZ\M_UserRole.cs" />
-    <Compile Include="M_Employee.cs" />
+    <Compile Include="Employees\M_Employee.cs" />
     <Compile Include="AuthZ\M_User.cs" />
-    <Compile Include="M_Permission.cs" />
+    <Compile Include="AuthZ\M_Permission.cs" />
     <Compile Include="AuthZ\M_RolePermission.cs" />
     <Compile Include="AuthZ\M_Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
