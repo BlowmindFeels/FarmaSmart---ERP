@@ -174,6 +174,56 @@ namespace FarmaSmartERP.DAL
             }
         }
 
+
+        // 🔹 Método para probar la conexión
+        public bool ProbarConexion(out string error)
+        {
+            error = null;
+            // usamos una variable local que referencia a esta instancia para poder llamar a los métodos que requieren ref
+            FarmaSmartContext db = this;
+
+            try
+            {
+                // Crea la conexión según NombreDB (esto asigna db._cn)
+                CrearConexionBD(ref db);
+
+                // Si por alguna razón CrearConexionBD no inicializó la conexión, la validamos
+                if (db.Cn == null)
+                {
+                    error = "La conexión no pudo ser inicializada (Cn == null). Verifica la cadena de conexión.";
+                    return false;
+                }
+
+                // Intentamos abrir y cerrar la conexión para probar conectividad
+                if (db.Cn.State == ConnectionState.Closed)
+                    db.Cn.Open();
+
+                // Si llegamos aquí, la conexión se abrió correctamente. La cerramos.
+                if (db.Cn.State == ConnectionState.Open)
+                    db.Cn.Close();
+
+                // Liberamos recursos
+                db.Cn.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // En caso de error intentamos cerrar/dispose si es necesario
+                try
+                {
+                    if (db.Cn != null && db.Cn.State == ConnectionState.Open)
+                        db.Cn.Close();
+                    db.Cn?.Dispose();
+                }
+                catch { /* ignoramos errores de limpieza */ }
+
+                error = ex.Message;
+                return false;
+            }
+        }
+
+
         private void PrepararConexionBD(ref FarmaSmartContext Db)
         {
             CrearConexionBD(ref Db);
@@ -257,6 +307,8 @@ namespace FarmaSmartERP.DAL
         }
 
         #endregion
+
+
 
     }
 }
