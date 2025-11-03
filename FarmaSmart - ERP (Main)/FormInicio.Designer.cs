@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.panel4 = new System.Windows.Forms.Panel();
+            this.contenedor = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.iconRRHH = new FontAwesome.Sharp.IconMenuItem();
             this.iconCRM = new FontAwesome.Sharp.IconMenuItem();
             this.iconInventario = new FontAwesome.Sharp.IconMenuItem();
             this.iconProveedores = new FontAwesome.Sharp.IconMenuItem();
-            this.contenedor = new System.Windows.Forms.Panel();
             this.panel4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -50,6 +50,15 @@
             this.panel4.TabIndex = 1;
             this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
+            // contenedor
+            // 
+            this.contenedor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contenedor.Location = new System.Drawing.Point(149, 0);
+            this.contenedor.Name = "contenedor";
+            this.contenedor.Size = new System.Drawing.Size(937, 636);
+            this.contenedor.TabIndex = 2;
+            this.contenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.contenedor_Paint);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.Highlight;
@@ -62,7 +71,7 @@
             this.iconProveedores});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(151, 636);
+            this.menuStrip1.Size = new System.Drawing.Size(149, 636);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -80,6 +89,7 @@
             this.iconRRHH.Size = new System.Drawing.Size(143, 95);
             this.iconRRHH.Text = "RRHH";
             this.iconRRHH.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.iconRRHH.Click += new System.EventHandler(this.iconRRHH_Click);
             // 
             // iconCRM
             // 
@@ -95,6 +105,7 @@
             this.iconCRM.Size = new System.Drawing.Size(143, 95);
             this.iconCRM.Text = "CRM";
             this.iconCRM.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.iconCRM.Click += new System.EventHandler(this.iconCRM_Click);
             // 
             // iconInventario
             // 
@@ -110,6 +121,7 @@
             this.iconInventario.Size = new System.Drawing.Size(141, 95);
             this.iconInventario.Text = "Inventario";
             this.iconInventario.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.iconInventario.Click += new System.EventHandler(this.iconInventario_Click);
             // 
             // iconProveedores
             // 
@@ -125,14 +137,7 @@
             this.iconProveedores.Size = new System.Drawing.Size(141, 95);
             this.iconProveedores.Text = "Proveedores";
             this.iconProveedores.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // contenedor
-            // 
-            this.contenedor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contenedor.Location = new System.Drawing.Point(151, 0);
-            this.contenedor.Name = "contenedor";
-            this.contenedor.Size = new System.Drawing.Size(935, 636);
-            this.contenedor.TabIndex = 2;
+            this.iconProveedores.Click += new System.EventHandler(this.iconProveedores_Click);
             // 
             // FormInicio
             // 

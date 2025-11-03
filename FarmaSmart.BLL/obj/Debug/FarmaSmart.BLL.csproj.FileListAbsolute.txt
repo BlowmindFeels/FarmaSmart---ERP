@@ -12,3 +12,7 @@ C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart.BLL\obj\Debug\FarmaSma
 C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart.BLL\obj\Debug\FarmaSmart.BLL.pdb
 C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart.BLL\obj\Debug\FarmaSmart.BLL.csproj.AssemblyReference.cache
 C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart.BLL\obj\Debug\FarmaSmart.BLL.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.BLL\obj\Debug\FarmaSmart.BLL.csproj.AssemblyReference.cache
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.BLL\obj\Debug\FarmaSmart.BLL.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.BLL\obj\Debug\FarmaSmart.BLL.dll
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.BLL\obj\Debug\FarmaSmart.BLL.pdb
