@@ -15,3 +15,27 @@ C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart - ERP (Main)\obj\Debug
 C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart - ERP (Main)\obj\Debug\FarmaSma.27BD3BE3.Up2Date
 C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart - ERP (Main).exe
 C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart - ERP (Main).pdb
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart.UI.csproj.AssemblyReference.cache
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart___ERP__Main_.Properties.Resources.resources
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart.UI.csproj.GenerateResource.cache
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart.UI.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\bin\Debug\FarmaSmart - ERP (Main).exe.config
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\bin\Debug\FarmaSmart - ERP (Main).exe
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\bin\Debug\FarmaSmart - ERP (Main).pdb
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\bin\Debug\FarmaSmart.BLL.dll
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\bin\Debug\FarmaSmart.DAL.dll
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\bin\Debug\FarmaSmart.Models.dll
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\bin\Debug\FarmaSmart.BLL.pdb
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\bin\Debug\FarmaSmart.DAL.pdb
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\bin\Debug\FarmaSmart.DAL.dll.config
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\bin\Debug\FarmaSmart.Models.pdb
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart___ERP__Main_.Form1.resources
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\obj\Debug\FarmaSma.27BD3BE3.Up2Date
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart - ERP (Main).exe
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart - ERP (Main).pdb
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart - ERP (Main).exe.config
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\bin\Debug\FontAwesome.Sharp.dll
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart___ERP__Main_.FormProveedores.resources
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart___ERP__Main_.FormRRHH.resources
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart___ERP__Main_.FormCRM.resources
+C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart___ERP__Main_.FormInventario.resources

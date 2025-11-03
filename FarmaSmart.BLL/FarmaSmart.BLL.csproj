@@ -31,17 +31,36 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FontAwesome.Sharp, Version=6.6.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.6.6.0\lib\net472\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BLL_StockMovement.cs" />
+    <Compile Include="BLL_Inventory.cs" />
+    <Compile Include="BLL_Product.cs" />
+    <Compile Include="BLL_ProductCategory.cs" />
+    <Compile Include="BLL_Supplier.cs" />
+    <Compile Include="BLL_Employee.cs" />
+    <Compile Include="BLL_Costumer.cs" />
+    <Compile Include="BLL_UserRole.cs" />
+    <Compile Include="BLL_User.cs" />
+    <Compile Include="BLL_RolePermission.cs" />
+    <Compile Include="BLL_Permission.cs" />
+    <Compile Include="BLL_Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +72,9 @@
       <Project>{72e84597-55c5-495e-9b56-b7661d78898f}</Project>
       <Name>FarmaSmart.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
