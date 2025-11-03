@@ -41,18 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL_StockMovement.cs" />
-    <Compile Include="BLL_Inventory.cs" />
-    <Compile Include="BLL_Product.cs" />
-    <Compile Include="BLL_ProductCategory.cs" />
-    <Compile Include="BLL_Supplier.cs" />
-    <Compile Include="BLL_Employee.cs" />
-    <Compile Include="BLL_Costumer.cs" />
-    <Compile Include="BLL_UserRole.cs" />
-    <Compile Include="BLL_User.cs" />
-    <Compile Include="BLL_RolePermission.cs" />
-    <Compile Include="BLL_Permission.cs" />
-    <Compile Include="BLL_Role.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
