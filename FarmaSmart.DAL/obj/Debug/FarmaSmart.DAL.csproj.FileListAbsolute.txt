@@ -27,3 +27,18 @@ C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart.D
 C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart.DAL\obj\Debug\FarmaSmart.DAL.dll
 C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart.DAL\obj\Debug\FarmaSmart.DAL.pdb
 C:\Users\Lenovo\Desktop\FarmaSmart---ERP-main\FarmaSmart---ERP-main\FarmaSmart.DAL\bin\Debug\FontAwesome.Sharp.dll
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.DAL\bin\Debug\FarmaSmart.DAL.dll.config
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.DAL\bin\Debug\FarmaSmart.DAL.dll
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.DAL\bin\Debug\FarmaSmart.DAL.pdb
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.DAL\bin\Debug\EntityFramework.dll
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.DAL\bin\Debug\FarmaSmart.Models.dll
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.DAL\bin\Debug\FontAwesome.Sharp.dll
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.DAL\bin\Debug\FarmaSmart.Models.pdb
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.DAL\bin\Debug\EntityFramework.xml
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.DAL\obj\Debug\FarmaSmart.DAL.csproj.AssemblyReference.cache
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.DAL\obj\Debug\FarmaSmart.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.DAL\obj\Debug\FarmaSma.7AB2D007.Up2Date
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.DAL\obj\Debug\FarmaSmart.DAL.dll
+C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.DAL\obj\Debug\FarmaSmart.DAL.pdb
