@@ -18,7 +18,7 @@ namespace FarmaSmart.BLL
 
         public void Index(ref M_Role role)
         {
-            ObjDB = new D_Role()
+            ObjDB = new FarmaSmartContext()
             {
                 NombreTabla = "Roles",
                 NombreSP = "[SP_Roles_Index]",
@@ -33,7 +33,7 @@ namespace FarmaSmart.BLL
 
         public void Create(ref M_Role role)
         {
-            ObjDB = new D_Role()
+            ObjDB = new FarmaSmartContext()
             {
                 NombreTabla = "Roles",
                 NombreSP = "[SP_Roles_Create]",
@@ -49,7 +49,7 @@ namespace FarmaSmart.BLL
 
         public void Read(ref M_Role role)
         {
-            ObjDB = new D_Role()
+            ObjDB = new FarmaSmartContext()
             {
                 NombreTabla = "Roles",
                 NombreSP = "[SP_Roles_Read]",
@@ -63,7 +63,7 @@ namespace FarmaSmart.BLL
 
         public void Update(ref M_Role role)
         {
-            ObjDB = new D_Role()
+            ObjDB = new FarmaSmartContext()
             {
                 NombreTabla = "Roles",
                 NombreSP = "[SP_Roles_Update]",
@@ -80,7 +80,7 @@ namespace FarmaSmart.BLL
 
         public void Delete(ref M_Role role)
         {
-            ObjDB = new D_Role()
+            ObjDB = new FarmaSmartContext()
             {
                 NombreTabla = "Roles",
                 NombreSP = "[SP_Roles_Delete]",

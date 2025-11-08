@@ -63,3 +63,10 @@ C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart - 
 C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart - ERP (Main)\obj\Debug\FarmaSma.27BD3BE3.Up2Date
 C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart - ERP (Main).exe
 C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart - ERP (Main).pdb
+C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart - ERP (Main).exe.config
+C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart___ERP__Main_.FormInicio.resources
+C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart___ERP__Main_.FormCRM.resources
+C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart___ERP__Main_.FormInventario.resources
+C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart___ERP__Main_.FormProveedores.resources
+C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart - ERP (Main)\obj\Debug\FarmaSmart___ERP__Main_.FormRRHH.resources
+C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart - ERP (Main)\bin\Debug\FontAwesome.Sharp.dll

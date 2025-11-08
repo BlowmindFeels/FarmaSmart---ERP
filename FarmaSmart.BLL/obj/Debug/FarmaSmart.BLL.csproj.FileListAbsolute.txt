@@ -16,3 +16,4 @@ C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.BL
 C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.BLL\obj\Debug\FarmaSmart.BLL.csproj.CoreCompileInputs.cache
 C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.BLL\obj\Debug\FarmaSmart.BLL.dll
 C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.BLL\obj\Debug\FarmaSmart.BLL.pdb
+C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart.BLL\bin\Debug\FontAwesome.Sharp.dll
