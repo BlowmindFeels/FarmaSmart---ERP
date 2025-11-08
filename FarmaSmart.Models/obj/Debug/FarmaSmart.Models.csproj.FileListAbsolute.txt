@@ -10,3 +10,5 @@ C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.Mo
 C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.Models\obj\Debug\FarmaSmart.Models.csproj.CoreCompileInputs.cache
 C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.Models\obj\Debug\FarmaSmart.Models.dll
 C:\Users\Lenovo\source\repos\FarmaSmart---ERP\FARMASMART ERP MAIN3\FarmaSmart.Models\obj\Debug\FarmaSmart.Models.pdb
+C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart.Models\bin\Debug\FontAwesome.Sharp.dll
+C:\Users\USUARIO\Source\Repos\FarmaSmart---ERP\FarmaSmart.Models\obj\Debug\FarmaSma.FEDD384A.Up2Date
